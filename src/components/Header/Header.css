@@ -1,0 +1,61 @@
+.appTitle{
+    color: rgb(10, 128, 190);
+    width:100%;
+    height:51px;
+    line-height: 51px;
+    font-size: 25px;
+    padding: 0px 20px;
+}
+
+.headerBar {
+    width: 100%;
+    height: var(--headerBarHeight);
+    padding-left: 20px;
+    background-color: rgb(10, 128, 190);
+    line-height: 50px;
+    top: 50px;
+    display: flex;
+}
+
+.menuItem {
+    & > a {
+      color: rgb(85, 85, 85);
+      width: 100%;
+    }
+    box-sizing: content-box;
+    text-align: left;
+    padding: 10px 0;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    &:hover {
+      background-color: rgb(50, 97, 171);
+      & > a {
+        color: #fff;
+      }
+    }
+}
+.toggleButton,
+.navLinkWrapper {
+  &:hover {
+    cursor: pointer;
+    background-color: #77b3d4;
+  }
+  & > a {
+    color: white;
+  }
+  display: inline-block;
+  color: white;
+}
+
+.selectedItem {
+    background-color: #77b3d4;
+  }
+
+.menuItem:hover {
+    background-color: #77b3d4;
+}
+
+.menuItem:focus {
+    background-color: #77b3d4;
+}

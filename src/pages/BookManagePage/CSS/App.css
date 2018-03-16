@@ -1,0 +1,84 @@
+.appBody{
+    border-bottom: 2px solid #CDCDCD;
+}
+
+.gcnav{
+    background: rgb(129,112,164);
+    height:48px;
+    padding:11px;
+    width:100%;
+}
+.nav_item{
+    color: #FFF;
+}
+.nav_bottom{
+    widows: 100%;
+    height:20px;
+}
+.span1{
+    color: #FFF;
+    font-size: 16px;
+}
+.appHead{
+    margin-top: 15px;
+    text-align: center;
+}
+.bookNameSearch{
+    width:900px;
+    height:56px;
+    border:1px solid #CCC;
+    border-radius: 4px;
+    font-size:18px;
+    margin-right: 20px;
+}
+.bookNameSearchInput{
+    width:100%;
+    height:100%!important;
+    outline-width: 0;
+    box-shadow: none!important;
+    padding:6px 12px;
+}
+.searchArea{
+    display:inline-block;
+}
+.searchButton{
+    width:40px;
+    height:34px;
+}
+.appFunctionArea{
+    padding: 0px 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.functionButton{
+    width:68px;
+    height:34px;
+    padding: 6px 12px;
+    border: 1px solid #CDCDCD;
+    color: #FFF;
+    background: rgb(88,156,218);
+    margin-right: 10px;
+}
+.searchButton{
+    background: rgb(255,150,52);
+}
+.infList{
+    margin: 0px 10px;
+    text-align: center;
+    height:625px;
+    overflow-y :auto;
+
+}
+.bookInfItem{
+    background: rgb(248,248,248);
+}
+.appRight{
+    border: 1px solid #CDCDCD;
+}
+.tr_oncheck{
+    background: rgb(139,189,226);
+}
+.pagination{
+    text-align: center;
+    margin: 0px;
+}

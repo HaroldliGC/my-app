@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import BookManagePage from "./pages/BookManagePage/containers/BookManagePage";
 import UserManagePage from "./pages/UserManagePage/containers/UserManagePage";
 import BusinessPage from "./pages/BusinessPage/containers/BusinessPage";
+import LoginPage from "./pages/LoginPage/containers/LoginPage";
 
 export default class Root extends Component{
     constructor(props){
@@ -30,8 +31,8 @@ export default class Root extends Component{
         <Provider store={this.props.store}>
             <Router>
                 <div>
-                <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
-                <Route  exact path="/BookManagePage" component={BookManagePage} />
+                <Route exact path="/" component={LoginPage} />
+                <Route path="/BookManagePage" component={BookManagePage} />
                 <Route path="/UserManagePage" component={UserManagePage}/>
                 <Route path="/BusinessManagePage" component={BusinessPage}/>
                 </div>

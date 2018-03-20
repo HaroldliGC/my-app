@@ -8,6 +8,7 @@ import { postNewBook, deleteBook, updateBook, requstInitializationData, clearCur
 import BookList from "../components/BookList";
 import FunctionArea from '../components/FunctionArea';
 import UnRedoButton from '../components/UnRedoButton';
+import Header from '../../../components/Header/Header';
 
 import SearchBox from "../../../components/SearchBox/SearchBox";
 
@@ -18,10 +19,16 @@ class BookManagePage extends Component {
       page: 1,
       currentInfItem: 0,
       paginationNum: 10,
+      currentPath:'',
     };
     this.handlePagination = this.handlePagination.bind(this);
     this.handleInfItem = this.handleInfItem.bind(this);
     this.setPaginationNum = this.setPaginationNum.bind(this);
+    this.updateCurrentPath = this.updateCurrentPath.bind(this);
+  }
+  updateCurrentPath(){
+    const path = window.location.pathname;
+    this.setState({ currentPath: path });
   }
   componentDidMount(){
     //debugger
@@ -52,6 +59,8 @@ class BookManagePage extends Component {
     const searchItemIds = new Array("Name","Author","Type","Press","Isbn");
     const searchItemNames = new Array("书名","作者","类型","出版社","Isbn");
     return (
+      <div>
+        <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
         <div className="appBody">
             <div className="appHead">
               <SearchBox
@@ -98,6 +107,7 @@ class BookManagePage extends Component {
             />
             */}
           </div>
+        </div>
     );
   }
 }

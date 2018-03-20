@@ -12,9 +12,10 @@ export default class Header extends PureComponent{
     }
     render(){
         const currentPath = this.props.path;
+        console.log("currentPath:",currentPath)
         const select1 = currentPath === "/BookManagePage";
         const select2 = currentPath === "/UserManagePage";
-        const select3 = currentPath === "/BusinessManegePage";
+        const select3 = currentPath === "/BusinessManagePage";
         return(
             <div>
                 <div 

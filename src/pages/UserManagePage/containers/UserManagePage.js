@@ -8,6 +8,7 @@ import SearchBox from "../../../components/SearchBox/SearchBox";
 
 import UserList from "../components/UserList";
 import FunctionArea from '../components/FunctionArea';
+import Header from '../../../components/Header/Header';
 
 const cx = classNames.bind(styles);
 
@@ -18,12 +19,17 @@ class UserManagePage extends Component{
             page:1,
             paginationNum: 10,
             currentInfItem: 0,
+            currentPath:'',
         };
         this.handlePagination = this.handlePagination.bind(this);
         this.handleInfItem = this.handleInfItem.bind(this);
         this.setPaginationNum = this.setPaginationNum.bind(this);
+        this.updateCurrentPath = this.updateCurrentPath.bind(this);
     }
-
+    updateCurrentPath(){
+        const path = window.location.pathname;
+        this.setState({ currentPath: path });
+    }
     componentDidMount(){
         //debugger
         const uri = "http://localhost:26800/api/readerusers/getreaderusers/";
@@ -51,34 +57,36 @@ class UserManagePage extends Component{
         const searchItemIds = new Array("Name","AccountNumber");
         const searchItemNames = new Array("姓名","账号");
         return(
-            <div className={cx({appBody2:true})}>
-                <div classNaME={cx({appHead2:true})}>
-                    <SearchBox
-                    itemIds={searchItemIds}
-                    itemNames={searchItemNames}
-                    search={this.props.searchUser}
-                    Title="user"
-                    uri = "http://localhost:26800/api/ReaderUsers/getreaderuserbysearch/"
+            <div>
+                <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
+                <div className={cx({appBody2:true})}>
+                    <div classNaME={cx({appHead2:true})}>
+                        <SearchBox
+                        itemIds={searchItemIds}
+                        itemNames={searchItemNames}
+                        search={this.props.searchUser}
+                        Title="user"
+                        uri = "http://localhost:26800/api/ReaderUsers/getreaderuserbysearch/"
+                        />
+                    </div>
+                    <FunctionArea
+                        Index={this.state.currentInfItem}
+                        Inf={this.props.inf[this.state.currentInfItem]}
+                        setPaginationNum={this.setPaginationNum}
+                        blockUpUser={this.props.blockUpUser}
+                    />
+                    <hr/>
+                    <UserList
+                        Inf={this.props.inf}
+                        pageIndex={this.state.page}
+                        handleInfItem={this.handleInfItem}
+
+                        handlePagination={this.handlePagination}
+                        paginationNum={this.state.paginationNum}
+                        currentItem={this.state.currentInfItem}
                     />
                 </div>
-                <FunctionArea
-                    Index={this.state.currentInfItem}
-                    Inf={this.props.inf[this.state.currentInfItem]}
-                    setPaginationNum={this.setPaginationNum}
-                    blockUpUser={this.props.blockUpUser}
-                />
-                <hr/>
-                <UserList
-                    Inf={this.props.inf}
-                    pageIndex={this.state.page}
-                    handleInfItem={this.handleInfItem}
-
-                    handlePagination={this.handlePagination}
-                    paginationNum={this.state.paginationNum}
-                    currentItem={this.state.currentInfItem}
-                />
             </div>
-
         );
     }
 }

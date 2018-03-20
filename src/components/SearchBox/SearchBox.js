@@ -35,7 +35,7 @@ export default class SearchBox extends PureComponent{
             uri = "http://localhost:26800/api/ReaderUsers/getreaderuserbysearch/";
         }*/
         const url = this.props.uri+newData;
-        //console.log("uri",uri);
+        console.log("url",url);
         this.props.search(url);
     }
     render(){

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { Image } from 'react-bootstrap';
 import styles from './LoginPage.css';
-import loginImage1 from '../images/loginImage1.jpeg';
+import loginImage1 from '../images/timg3.jpg';
 import logo from '../images/logo.png';
-import { requstLogin } from '../actions/index';
+import { loginAction ,requstLogin } from '../actions/index';
 
 import LoginForm from '../components/LoginForm';
 
@@ -13,6 +13,9 @@ const cx = classNames.bind(styles);
 
 class LoginPage extends Component{
     render(){
+        console.log("inf:",this.props.inf)
+        const isFailed = (this.props.inf === 'failed');
+        console.log("signal",isFailed)
         return(
             <div className={cx({loginBody: true})}>
                 <div className={cx({leftImage: true})}>
@@ -22,9 +25,14 @@ class LoginPage extends Component{
                     <Image src={logo} responsive className={cx({logo: true})}/>
                     <LoginForm 
                         search={this.props.requstLogin}
-                        uri="http://localhost:26800/api/ReaderUsers/getreaderuserlogin/"
+                        uri="http://localhost:26800/api/ManageUsers/getmanageuserlogin/"
                     />
+                    {isFailed &&
+                    <div className={cx({inputContainer: true})}>
+                        <div className={cx({errorMessage: true})}>用户名或密码错误</div>
+                    </div>}
                 </div>
+                
             </div>
         );
     }
@@ -32,13 +40,14 @@ class LoginPage extends Component{
 
 function mapStateToProps(state) {
     return {
-        inf: state,
+        inf: state.present.OperateLogin[0]
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return{
         requstLogin: (uri) => dispatch(requstLogin(uri)),
+        loginAction: (str) => dispatch(loginAction(str)),
     }
 }
 

@@ -1,3 +1,12 @@
+export const LOGIN = "LOGIN";
+
+export function loginAction(str){
+    return{
+        type: LOGIN,
+        str
+    }
+}
+
 //登陆验证
 export function requstLogin(uri){
     return (dispatch) => {
@@ -8,7 +17,10 @@ export function requstLogin(uri){
             }
           return response.json();
           }).then(function(data){
-          console.log(data)
+            dispatch(loginAction(data));
+            if (data === 'success'){
+                window.location.pathname = "/BookManagePage";
+            }
           });
     }
 }

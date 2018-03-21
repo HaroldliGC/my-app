@@ -11,11 +11,10 @@ export default class LoginForm extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        const userAccount = document.getElementById("userAccount").value;
-        const userPassword = document.getElementById("userPassword").value;
-        //console.log("userAccount",userAccount)
-        //console.log("userPassword",userPassword)
-        const data = "?userAccount"+"="+userAccount+"&userPassword"+"="+userPassword;
+        const userAccount = encodeURIComponent(document.getElementById("userAccount").value);
+        const userPassword = encodeURIComponent(document.getElementById("userPassword").value);
+        const userSign =  encodeURIComponent(document.getElementById("userSign").value);
+        const data = "?userAccount"+"="+userAccount+"&userPassword"+"="+userPassword+"&userSign"+"="+userSign;
         const url = this.props.uri + data;
         this.props.search(url);
     }
@@ -40,6 +39,16 @@ export default class LoginForm extends Component{
                             type="password"
                             placeholder="password"
                             id="userPassword"
+                        >
+                        </input>
+                    </div>
+                    <div className={cx({inputContainer: true})}>
+                        <input
+                            className={cx({fieldInput: true})}
+                            name="sign"
+                            type="text"
+                            placeholder="sign"
+                            id="userSign"
                         >
                         </input>
                     </div>

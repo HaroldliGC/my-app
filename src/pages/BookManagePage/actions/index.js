@@ -36,8 +36,13 @@ export function postNewBook(uri,formData){
             }
           return response.json();
           }).then(function(data){
-              //console.log("post return data:",data);
-              dispatch(newOperatorAction(data));
+              if (data !== undefined){
+                console.log("post return data:",data);
+                dispatch(newOperatorAction(data));
+              }
+              else{
+                console.log("该书已经存在")
+              }
           });
     }
 }

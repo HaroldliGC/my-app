@@ -10,7 +10,6 @@ import SetPagination from '../../../components/SetPagination';
 import UnRedoButton from './UnRedoButton';
 
 import DetailsForm from "./DetailsForm";
-import NewBookForm from "./NewBookForm";
 
 export default class FunctionArea extends Component {
 
@@ -20,14 +19,12 @@ export default class FunctionArea extends Component {
                                Inf = {this.props.Inf} 
                             >
                             </DetailsForm>
-        const addNewForm = <NewBookForm></NewBookForm> 
         
         return (
             <div className="appFunctionArea">
                 <AddNewButton 
                     postNewBook={this.props.postNewBook}
                     uri="http://localhost:26800/api/Books/postbook/"
-                    form={addNewForm}
                 />
                 <EditButton
                     Inf={this.props.Inf}

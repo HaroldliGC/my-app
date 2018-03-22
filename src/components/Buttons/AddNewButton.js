@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
 import classNames from 'classnames/bind';
 import styles from './Buttons.css';
+import NewBookForm from '../../pages/BookManagePage/components/NewBookForm';
 
 const cx = classNames.bind(styles);
 
@@ -11,12 +12,27 @@ class AddNewButton extends Component{
         super(props);
         this.state = {
             show:false,
+            Id : 0,
+            Isbn : '',
+            Name : '',
+            Type : '',
+            Press: '',
+            Price: 0,
+            Number: 0,
+            BorrowNumber : 0,
+            ResidueNumber: 0,
+            Info : '',
+            Author : '',
         };
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleBook = this.handleBook.bind(this);
     }
-
+    handleBook(bookItem){
+        this.setState(...this.state,bookItem);
+    }
+    
     handleClose(){
         this.setState({show:false});
     }
@@ -25,31 +41,8 @@ class AddNewButton extends Component{
     }
     handleSubmit(event){
         this.handleClose();
-        const bookIsbn = document.getElementById("bookIsbn").value.toString();
-        const bookName = document.getElementById("bookName").value.toString();
-        const bookType = document.getElementById("bookType").value.toString();
-        const bookPress = document.getElementById("bookPress").value.toString();
-        const bookPrice = document.getElementById("bookPrice").value.toString();
-        const bookNumber = document.getElementById("bookNumber").value.toString();
-        const bookInfo = document.getElementById("bookInfo").value.toString();
-        const bookAuthor = document.getElementById("bookAuthor").value.toString();
-        
-        var book = {
-            Id : 0,
-            Isbn : bookIsbn,
-            Name : bookName,
-            Type : bookType,
-            Press : bookPress,
-            Price : Number(bookPrice),
-            Number: parseInt(bookNumber),
-            BorrowNumber : 0,
-            ResidueNumber: 0,
-            Info : bookInfo,
-            Author: bookAuthor,
-        }
-        //console.log("formBook:",book);
         const uri = this.props.uri;
-        this.props.postNewBook(uri,book);
+        this.props.postNewBook(uri,this.state);
         event.preventDefault();
     }
 
@@ -64,7 +57,10 @@ class AddNewButton extends Component{
                         <Modal.Title>书籍信息录入</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.props.form} 
+                        <NewBookForm
+                            handleBook = {this.handleBook}
+                        >
+                        </NewBookForm> 
                     </Modal.Body>
                     <ModalFooter>
                         <FormGroup>
@@ -89,7 +85,6 @@ class AddNewButton extends Component{
 AddNewButton.PropTypes = {
     postNewBook : PropTypes.func,
     uri : PropTypes.string,
-    form: PropTypes.element,
 }
 
 export default AddNewButton

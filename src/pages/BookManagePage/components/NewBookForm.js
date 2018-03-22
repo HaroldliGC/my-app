@@ -1,16 +1,27 @@
 import React, {Component} from "react";
 import {Form,FormGroup,Col,ControlLabel,FormControl} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 class NewBookForm extends Component{
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event){
+        var bookItem = [];
+        var key = event.target.id;
+        bookItem[key] = event.target.value;
+        this.props.handleBook(bookItem);
+    }
     render(){
         return(
-            <Form horizontal id="OperatorInfForm">
+            <Form horizontal id="OperatorInfForm" onChange={this.handleChange}> 
                 <FormGroup controlid="formHorizontalName">
                     <Col componentClass={ControlLabel} sm={4}>
                         国际标准书号:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookIsbn">
+                        <FormControl type="text" id="Isbn">
                             
                         </FormControl>
                     </Col>
@@ -20,7 +31,7 @@ class NewBookForm extends Component{
                         书名:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookName">
+                        <FormControl type="text" id="Name">
                             
                         </FormControl>
                     </Col>
@@ -30,7 +41,7 @@ class NewBookForm extends Component{
                         作者:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookAuthor">
+                        <FormControl type="text" id="Author">
                             
                         </FormControl>
                     </Col>
@@ -40,7 +51,7 @@ class NewBookForm extends Component{
                         分类:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookType">
+                        <FormControl type="text" id="Type">
                             
                         </FormControl>
                     </Col>
@@ -50,7 +61,7 @@ class NewBookForm extends Component{
                         出版社:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookPress">
+                        <FormControl type="text" id="Press">
                             
                         </FormControl>
                     </Col>
@@ -60,7 +71,7 @@ class NewBookForm extends Component{
                         价格:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookPrice">
+                        <FormControl type="text" id="Price">
                             
                         </FormControl>
                     </Col>
@@ -70,7 +81,7 @@ class NewBookForm extends Component{
                         数量:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" id="bookNumber">
+                        <FormControl type="text" id="Number">
                             
                         </FormControl>
                     </Col>
@@ -80,7 +91,7 @@ class NewBookForm extends Component{
                         简介:
                     </Col>
                     <Col sm={8}>
-                        <FormControl componentClass="textarea"  id="bookInfo">
+                        <FormControl componentClass="textarea"  id="Info">
                             
                         </FormControl>
                     </Col>
@@ -90,5 +101,8 @@ class NewBookForm extends Component{
     }
 }
 
+NewBookForm.PropTypes = {
+    handleBook : PropTypes.func,
+}
 
 export default NewBookForm;

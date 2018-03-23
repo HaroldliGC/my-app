@@ -12,17 +12,19 @@ class AddNewButton extends Component{
         super(props);
         this.state = {
             show:false,
-            Id : 0,
-            Isbn : '',
-            Name : '',
-            Type : '',
-            Press: '',
-            Price: 0,
-            Number: 0,
-            BorrowNumber : 0,
-            ResidueNumber: 0,
-            Info : '',
-            Author : '',
+            book:{
+                Id : 0,
+                Isbn : '',
+                Name : '',
+                Type : '',
+                Press: '',
+                Price: 0,
+                Number: 0,
+                BorrowNumber : 0,
+                ResidueNumber: 0,
+                Info : '',
+                Author : '',
+           },
         };
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -30,7 +32,10 @@ class AddNewButton extends Component{
         this.handleBook = this.handleBook.bind(this);
     }
     handleBook(bookItem){
-        this.setState(...this.state,bookItem);
+        this.setState({book: {...this.state.book, ...bookItem}}, (state) => {
+            console.log(this.state)
+        });
+
     }
     
     handleClose(){
@@ -42,7 +47,7 @@ class AddNewButton extends Component{
     handleSubmit(event){
         this.handleClose();
         const uri = this.props.uri;
-        this.props.postNewBook(uri,this.state);
+        this.props.postNewBook(uri,this.state.book);
         event.preventDefault();
     }
 

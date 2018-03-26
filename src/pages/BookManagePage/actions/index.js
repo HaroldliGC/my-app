@@ -76,6 +76,7 @@ export function updateBook(uri,formData,index){
               console.log("request " + uri + "error! status: " + response.status);
               return;
             }
+            console.log("put return data:",response)
             dispatch(editInf(formData,index));
         }
         );

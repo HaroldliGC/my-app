@@ -10,6 +10,9 @@ class NewBookForm extends Component{
     handleChange(event){
         var bookItem = [];
         var key = event.target.id;
+        if (key === 'Number'){
+            bookItem['ResidueNumber'] = event.target.value;
+        }
         bookItem[key] = event.target.value;
         this.props.handleBook(bookItem);
     }

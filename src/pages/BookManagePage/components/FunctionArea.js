@@ -11,6 +11,9 @@ import UnRedoButton from './UnRedoButton';
 
 import DetailsForm from "./DetailsForm";
 
+import {NEW_BOOK, EDIT_BOOK, DETAIL_BOOK, DELETE_BOOK} from '../../../common/OperateKeys';
+import BookPanel from '../../../components/ReduxForm/BookPanel';
+
 export default class FunctionArea extends Component {
 
 
@@ -22,35 +25,45 @@ export default class FunctionArea extends Component {
         
         return (
             <div className="appFunctionArea">
+            {/*
                 <AddNewButton 
                     postNewBook={this.props.postNewBook}
                     uri="http://localhost:26800/api/Books/postbook/"
+            />*/}
+                <BookPanel
+                    inputType = {NEW_BOOK}
+                    todo = {this.props.postNewBook}
+                    url = "http://localhost:61021/api/Books/PostBook"
+                    info = {this.props.Inf}
+                    initFormData={this.props.initFormData}
                 />
-                <EditButton
-                    Inf={this.props.Inf}
+                <BookPanel
+                    inputType = {EDIT_BOOK}
+                    todo = {this.props.updateBook}
+                    info = {this.props.Inf}
+                    initFormData={this.props.initFormData}
                     index={this.props.Index}
-                    editInf={this.props.EditInf}
-                    updateBook={this.props.updateBook}
-                    form={detailsForm}
-                    uri="http://localhost:26800/api/Books/putbook/"
+                    url="http://localhost:61021/api/Books/putbook/"
                 />
                 <DeleteButton
                     index={this.props.Index}
                     handleInfItem={this.props.handleInfItem}
                     deleteBook = {this.props.deleteBook}
                     Inf={this.props.Inf}
-                    uri="http://localhost:26800/api/Books/deletebook/"
+                    uri="http://localhost:61021/api/Books/deletebook/"
                 />
-                <DetailsButton
-                    Inf={this.props.Inf}
-                    form={detailsForm}
+                <BookPanel
+                    inputType = {DETAIL_BOOK}
+                    info =  {this.props.Inf}
+                    initFormData={this.props.initFormData}
                 />
+                {/*
                 <UnRedoButton
                     Undo={this.props.onUndo}
                     Redo={this.props.onRedo}
                     pastLength={this.props.pastLength}
                     futureLength={this.props.futureLength}
-                />
+                />*/}
                 <SetPagination
                     setPaginationNum={this.props.setPaginationNum}
                 />

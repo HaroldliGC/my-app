@@ -4,6 +4,7 @@ import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bo
 import classNames from 'classnames/bind';
 import styles from './Buttons.css';
 import NewBookForm from '../../pages/BookManagePage/components/NewBookForm';
+import Form from '../ReduxForm/BookForm';
 
 const cx = classNames.bind(styles);
 
@@ -62,10 +63,7 @@ class AddNewButton extends Component{
                         <Modal.Title>书籍信息录入</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <NewBookForm
-                            handleBook = {this.handleBook}
-                        >
-                        </NewBookForm> 
+                        <Form/>
                     </Modal.Body>
                     <ModalFooter>
                         <FormGroup>

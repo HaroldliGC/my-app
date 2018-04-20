@@ -1,8 +1,9 @@
+import NotificationSystem from 'react-notification-system';
 import React, { Component } from "react";
 import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 import "../CSS/App.css";
 import { connect } from 'react-redux';
-import { newOperatorAction, editInf, deleteInfItem, initializationData, undoAction, redoAction} from "../actions/consts";
+import { initFormData, newOperatorAction, editInf, deleteInfItem, initializationData, undoAction, redoAction} from "../actions/consts";
 import { postNewBook, deleteBook, updateBook, requstInitializationData, clearCurrentStore, searchBook} from "../actions/index";
 
 import BookList from "../components/BookList";
@@ -32,8 +33,32 @@ class BookManagePage extends Component {
   }
   componentDidMount(){
     //debugger
-    const uri = "http://localhost:26800/api/books/getbooks";
+    const uri = "http://localhost:61021/api/Books/GetBooks";
     this.props.requstInitializationData(uri);
+  }
+  componentWillReceiveProps(nextProps){
+    //debugger
+    if (nextProps.messages.content !== ''){
+      const message = nextProps.messages;
+      let mylevel = '';
+      switch(message.type){
+        case 'success':
+          mylevel = 'success';
+          break;
+        case 'error':
+          mylevel = 'error';
+          break;
+        default:
+          mylevel = 'info';
+      }
+      this.notificationSystem.addNotification({
+        title: '书籍管理',
+        message: message.content,
+        level: mylevel
+      })
+      message.content = '';
+      message.type = '';
+    }
   }
   /*
   componentWillUnmount(){
@@ -60,6 +85,7 @@ class BookManagePage extends Component {
     const searchItemNames = new Array("书名","作者","类型","出版社","Isbn");
     return (
       <div>
+        <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
         <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
         <div className="appBody">
             <div className="appHead">
@@ -68,7 +94,7 @@ class BookManagePage extends Component {
                 itemNames={searchItemNames}
                 search={this.props.searchBook}
                 Title = "book"
-                uri = "http://localhost:26800/api/Books/getbookbysearch/" 
+                uri = "http://localhost:61021/api/Books/getbookbysearch/" 
               />
             </div>
             <FunctionArea
@@ -78,7 +104,8 @@ class BookManagePage extends Component {
               DeleteInfItem={this.props.onDeleteInfItem}
               setPaginationNum={this.setPaginationNum}
               handleInfItem={this.handleInfItem}
-              
+              initFormData={this.props.onInitFormData}
+
               onUndo={this.props.onUndo}
               onRedo={this.props.onRedo}
               pastLength={this.props.pastLength}
@@ -87,6 +114,8 @@ class BookManagePage extends Component {
               postNewBook={this.props.postNewBook}
               deleteBook={this.props.deleteBook}
               updateBook={this.props.updateBook}
+
+              errors={this.props.errors}
             />
             <hr/>
             <BookList
@@ -115,7 +144,8 @@ class BookManagePage extends Component {
 function mapStateToProps(state) {
   //console.log("state:",state.present.OperateBook)
   return {
-    inf: state.present.OperateBook,
+    inf: state.present.OperateBook.books,
+    messages: state.present.OperateBook.messages,
     //length: state.length,
     pastLength : state.past.length,
     futureLength : state.future.length,
@@ -127,6 +157,7 @@ function mapDispatchToProps(dispatch) {
     onInitializationData: (data) => dispatch(initializationData(data)),
     onDeleteInfItem: (index) => dispatch(deleteInfItem(index)),
     onEditInf: (text, index) => dispatch(editInf(text, index)),
+    onInitFormData: (data) => dispatch(initFormData(data)),
 
     onUndo : () => dispatch(undoAction()),
     onRedo : () => dispatch(redoAction()),

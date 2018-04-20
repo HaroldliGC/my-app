@@ -1,0 +1,1 @@
+export const LSKEY_ACCESS_TOKEN = "token";

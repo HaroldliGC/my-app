@@ -5,11 +5,13 @@ export const INITIALIZATION_DATA = "INITIALIZATION_DATA";
 export const CLEAR_STORE = "CLEAR_STORE";
 export const UNDO = "UNDO";
 export const REDO = "REDO";
+export const MESSAGE = "MESSAGE";
+export const INIT_FORM = "INIT_FORM";
 
-export function newOperatorAction(array){
+export function newOperatorAction(data){
     return{
         type: NEW_OPERATOR,
-        array
+        data
     }
 }
 
@@ -52,5 +54,20 @@ export function undoAction(){
 export function redoAction(){
     return{
         type : REDO
+    }
+}
+
+export function showMessage(content,messageType){
+    return{
+        type: MESSAGE,
+        content,
+        messageType
+    }
+}
+
+export function initFormData(data) {
+    return{
+        type: INIT_FORM,
+        data
     }
 }

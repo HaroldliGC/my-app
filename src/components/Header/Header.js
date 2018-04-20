@@ -5,6 +5,7 @@ import NavLink from './NavLink';
 import PropTypes from 'prop-types';
 import exitPic from './img/exit.png';
 import { Image } from 'react-bootstrap';
+import {clearToken} from "../../common/utils";
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ export default class Header extends PureComponent{
         this.handleExit = this.handleExit.bind(this);
     }
     handleExit(){
+        clearToken();
         window.location.pathname = "/";
     }
     componentDidMount(){

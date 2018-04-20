@@ -1,6 +1,7 @@
-import {ADD_READERUSER, DELETE_READERUSER, EDIT_READERUSER, CLEAR_READERUSER_STORE,INITIALIZATION_READERUSER} from '../actions/consts';
+import { USER_INIT_FORM, USER_MESSAGE, ADD_READERUSER, DELETE_READERUSER, EDIT_READERUSER, CLEAR_READERUSER_STORE,INITIALIZATION_READERUSER} from '../actions/consts';
+import {combineReducers} from 'redux';
 
-function OperateReaderUser (state=[],action){
+function users (state=[],action){
     switch(action.type){
         case ADD_READERUSER:
             return [...state,action.array];
@@ -31,5 +32,36 @@ function OperateReaderUser (state=[],action){
             return state;
     }
 }
+
+function initFormData (state={}, action){
+    let newState = {...state};
+    switch(action.type){
+        case USER_INIT_FORM:
+            newState = action.data;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+function messages (state={content:'',type:''},action){
+    let newState = {...state};
+    switch(action.type){
+        case USER_MESSAGE:
+            newState.content = action.content;
+            newState.type = action.messageType;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+const OperateReaderUser = combineReducers({
+    users,
+    messages,
+    initFormData
+})
 
 export default OperateReaderUser;

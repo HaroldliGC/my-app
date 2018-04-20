@@ -1,0 +1,20 @@
+.deleteButton{
+    background: rgb(245,105,85);
+}
+
+.normalButton{
+    background: rgb(88,156,218);
+}
+
+.functionButton{
+    width:68px;
+    height:34px;
+    padding: 6px 12px;
+    border: 1px solid #CDCDCD;
+    color: #FFF;
+    margin-right: 10px;
+}
+
+.searchButton{
+    background: rgb(255,150,52);
+}

@@ -9,14 +9,31 @@ export default class LoginForm extends Component{
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.serializeObj = this.serializeObj.bind(this);
     }
+    serializeObj(obj) {
+        var result = [];
+        for (var property in obj){
+            result.push(encodeURIComponent(property) + "=" + encodeURIComponent(obj[property]));
+        }
+        return result.join("&");
+    }
+
     handleClick(){
-        const userAccount = encodeURIComponent(document.getElementById("userAccount").value);
-        const userPassword = encodeURIComponent(document.getElementById("userPassword").value);
-        const userSign =  encodeURIComponent(document.getElementById("userSign").value);
-        const data = "?userAccount"+"="+userAccount+"&userPassword"+"="+userPassword+"&userSign"+"="+userSign;
-        const url = this.props.uri + data;
-        this.props.search(url);
+        const userAccount = document.getElementById("userAccount").value;
+        const userPassword = document.getElementById("userPassword").value;
+        /*
+        let formData = new FormData();
+        formData.append("grant_type","password");
+        formData.append("username",userAccount);
+        formData.append("password",userPassword);*/
+        const data = {
+            'grant_type': 'password',
+            'username': userAccount,
+            'password': userPassword,
+        }
+        const formData = this.serializeObj(data);
+        this.props.search(formData);
     }
     render(){
         return(
@@ -69,5 +86,4 @@ export default class LoginForm extends Component{
 
 LoginForm.PropTypes = {
     search : PropTypes.func,
-    uri : PropTypes.string,
 }

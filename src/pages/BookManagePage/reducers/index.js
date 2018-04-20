@@ -1,37 +1,67 @@
 
-import { NEW_OPERATOR, EDIT_INF, DELETE_INFITEM, INITIALIZATION_DATA, CLEAR_STORE } from "../actions/consts";
+import {INIT_FORM, MESSAGE, NEW_OPERATOR, EDIT_INF, DELETE_INFITEM, INITIALIZATION_DATA, CLEAR_STORE } from "../actions/consts";
+import {combineReducers} from 'redux';
 
-function OperateBook (state=[],action){
+function books (state=[],action){
+    let newState = state.concat();
     switch(action.type){
-        case NEW_OPERATOR:
-            return [...state,action.array];
+        case NEW_OPERATOR:{
+            newState.push(action.data);
+            break;
+        }
         case INITIALIZATION_DATA:{
-            const length = action.data.length;
-            let rec = [];
-            for (let i=0; i<length; i++){
-                rec.push(action.data[i]);
-            }
-            return rec;
+            newState = action.data;
+            break;
         }
         case DELETE_INFITEM:{
             var index = parseInt(action.index);
-            let rec = state.concat();
-            rec.splice(index,1);
-            return rec;
+            newState.splice(index,1);
+            break;
         }
         case EDIT_INF:{
             var index = parseInt(action.index);
-            let rec = state.concat();
-            rec.splice(index,1,action.text);
-            return rec;
+            newState.splice(index,1,action.text);
+            break;
         }
         case CLEAR_STORE:{
-            return [];
+            newState = [];
+            break;
         }
         default:
             return state;
     }
+    return newState;
 }
 
+function initFormData (state={}, action){
+    let newState = {...state};
+    switch(action.type){
+        case INIT_FORM:
+            newState = action.data;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+function messages (state={content:'',type:''},action){
+    let newState = {...state};
+    switch(action.type){
+        case MESSAGE:
+            newState.content = action.content;
+            newState.type = action.messageType;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+const OperateBook = combineReducers({
+    books,
+    messages,
+    initFormData
+})
 
 export default OperateBook;

@@ -36,7 +36,7 @@ export default class UserItem extends Component{
 
         return(
             <tr onClick={this.handleClick} className={cx({itemBackground:haveBackground,tr_oncheck:select})}>
-                <th>{this.props.Information.AccountNumber}</th>
+                <th>{this.props.Information.Account}</th>
                 <th>{this.props.Information.Name}</th>
                 <th>{state}</th>
                 <th>{this.props.Information.Phone}</th>

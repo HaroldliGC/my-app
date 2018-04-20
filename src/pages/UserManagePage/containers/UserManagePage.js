@@ -1,3 +1,4 @@
+import NotificationSystem from 'react-notification-system';
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
@@ -32,8 +33,32 @@ class UserManagePage extends Component{
     }
     componentDidMount(){
         //debugger
-        const uri = "http://localhost:26800/api/readerusers/getreaderusers/";
+        const uri = "http://localhost:61021/api/Users/GetUsers/";
         this.props.requstInitializationReaderUser(uri);
+    }
+    componentWillReceiveProps(nextProps){
+        //debugger
+        if (nextProps.messages.content !== ''){
+          const message = nextProps.messages;
+          let mylevel = '';
+          switch(message.type){
+            case 'success':
+              mylevel = 'success';
+              break;
+            case 'error':
+              mylevel = 'error';
+              break;
+            default:
+              mylevel = 'info';
+          }
+          this.notificationSystem.addNotification({
+            title: '用户管理',
+            message: message.content,
+            level: mylevel
+          })
+          message.content = '';
+          message.type = '';
+        }
     }
     componentWillUnmount(){
         this.props.clearCurrentReaderUserStore();
@@ -58,6 +83,7 @@ class UserManagePage extends Component{
         const searchItemNames = new Array("姓名","账号");
         return(
             <div>
+                <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
                 <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
                 <div className={cx({appBody2:true})}>
                     <div classNaME={cx({appHead2:true})}>
@@ -66,7 +92,7 @@ class UserManagePage extends Component{
                         itemNames={searchItemNames}
                         search={this.props.searchUser}
                         Title="user"
-                        uri = "http://localhost:26800/api/ReaderUsers/getreaderuserbysearch/"
+                        uri = "http://localhost:61021/api/Users/GetReaderUserBySearch/"
                         />
                     </div>
                     <FunctionArea
@@ -93,7 +119,8 @@ class UserManagePage extends Component{
 function mapStateToProps(state) {
     //console.log("state:",state.present.OperateBook)
     return {
-      inf: state.present.OperateReaderUser,
+      inf: state.present.OperateReaderUser.users,
+      messages: state.present.OperateReaderUser.messages,
       //length: state.length,
       pastLength : state.past.length,
       futureLength : state.future.length,

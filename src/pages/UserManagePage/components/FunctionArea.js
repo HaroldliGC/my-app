@@ -23,7 +23,7 @@ export default class FunctionArea extends Component{
                     Inf = {this.props.Inf}
                     index = {this.props.Index}
                     blockUpUser = {this.props.blockUpUser}
-                    uri = "http://localhost:26800/api/ReaderUsers/putreaderuser/"
+                    uri = "http://localhost:61021/api/Users/PutUserState/"
                 />
                 <StateCtr
                     title="恢复"
@@ -31,7 +31,7 @@ export default class FunctionArea extends Component{
                     Inf = {this.props.Inf}
                     index = {this.props.Index}
                     blockUpUser = {this.props.blockUpUser}
-                    uri = "http://localhost:26800/api/ReaderUsers/putreaderuser/"
+                    uri = "http://localhost:61021/api/Users/PutUserState/"
                 />
                 <SetPagination
                     setPaginationNum={this.props.setPaginationNum}

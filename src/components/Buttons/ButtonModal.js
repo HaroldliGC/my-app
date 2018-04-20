@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Button} from 'react-bootstrap';
 import classNames from 'classnames/bind';
 import styles from './Buttons.css';
 
@@ -15,9 +14,9 @@ export default class ButtonModal extends Component{
         this.props.Click();
     }
     render(){
-        let normal0 = this.props.type == "normal";
-        let delete0 = (this.props.type == "delete" || this.props.type == "stop");
-        let search0 = this.props.type == "search";
+        let normal0 = this.props.type === "normal";
+        let delete0 = (this.props.type === "delete" || this.props.type === "stop");
+        let search0 = this.props.type === "search";
         return(
             <button className={cx({functionButton:true,normalButton:normal0,deleteButton:delete0,searchButton:search0})} onClick={this.handleClick}>
                 {this.props.title}

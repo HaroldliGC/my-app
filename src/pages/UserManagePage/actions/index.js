@@ -1,4 +1,5 @@
-import {addReaderUser,deleteReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from './consts';
+import {showMessage,addReaderUser,deleteReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from './consts';
+import {serviceApi,getToken,clearToken} from '../../../common/utils';
 
 //画面跳转时清空store
 export function clearCurrentReaderUserStore(){
@@ -9,7 +10,7 @@ export function clearCurrentReaderUserStore(){
 //请求初始化数据
 export function requstInitializationReaderUser(uri){
     return (dispatch) => {
-        return fetch(uri).then(function (response){
+        return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
               return;
@@ -38,20 +39,17 @@ export function searchUser(uri){
 
 //停用读者
 export function blockUpUser(uri,formData,index){
-    const myHeaders = new Headers();
-    myHeaders.append('Accept', 'application/json');
-    myHeaders.append('Content-Type', 'application/json');
-    const myInit = {    method: 'PUT',
-                        headers: myHeaders,
-                        body: JSON.stringify(formData)
-                    };
     return (dispatch) => {
-        return fetch(uri,myInit).then(function (response){
+        return serviceApi(uri,{method:'PUT',body: JSON.stringify(formData)}).then(function (response){
+            console.log("用户状态改变：",response)
             if (response.status !== 204) {
               console.log("request " + uri + "error! status: " + response.status);
+              dispatch(showMessage('用户状态更新失败','error'));
               return;
+            } else {
+                dispatch(editReaderUser(formData,index));
+                dispatch(showMessage('用户状态更新成功','success'));
             }
-            dispatch(editReaderUser(formData,index));
         }
         );
     }

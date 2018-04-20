@@ -25,7 +25,6 @@ class LoginPage extends Component{
                     <Image src={logo} responsive className={cx({logo: true})}/>
                     <LoginForm 
                         search={this.props.requstLogin}
-                        uri="http://localhost:26800/api/ManageUsers/getmanageuserlogin/"
                     />
                     {isFailed &&
                     <div className={cx({inputContainer: true})}>
@@ -46,7 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return{
-        requstLogin: (uri) => dispatch(requstLogin(uri)),
+        requstLogin: (data) => dispatch(requstLogin(data)),
         loginAction: (str) => dispatch(loginAction(str)),
     }
 }

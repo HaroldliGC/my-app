@@ -1,6 +1,7 @@
 
 import {INIT_FORM, MESSAGE, NEW_OPERATOR, EDIT_INF, DELETE_INFITEM, INITIALIZATION_DATA, CLEAR_STORE } from "../actions/consts";
 import {combineReducers} from 'redux';
+import { reducer as formReducer} from 'redux-form';
 
 function books (state=[],action){
     let newState = state.concat();
@@ -61,7 +62,8 @@ function messages (state={content:'',type:''},action){
 const OperateBook = combineReducers({
     books,
     messages,
-    initFormData
+    initFormData,
+    form: formReducer
 })
 
 export default OperateBook;

@@ -15,7 +15,7 @@ export default class DeleteButton extends Component{
     }
     render(){
         return(
-            <ButtonModal title="删除" type="delete" Click={this.handleClick}/>
+            <ButtonModal title="删除" type="danger" Click={this.handleClick}/>
         )
     }
 }

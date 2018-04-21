@@ -40,6 +40,7 @@ export default class UserItem extends Component{
                 <th>{this.props.Information.Name}</th>
                 <th>{state}</th>
                 <th>{this.props.Information.Phone}</th>
+                <th>{this.props.Information.Identity}</th>
             </tr>
         )
     }

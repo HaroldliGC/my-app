@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from './UserManagePage.css';
-import {addReaderUser,deleteReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from '../actions/consts';
-import {clearCurrentReaderUserStore,requstInitializationReaderUser,searchUser,blockUpUser} from "../actions/index";
+import {initFormData,addReaderUser,deleteReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from '../actions/consts';
+import {createAccount,resetPassword,clearCurrentReaderUserStore,requstInitializationReaderUser,searchUser,blockUpUser} from "../actions/index";
 import SearchBox from "../../../components/SearchBox/SearchBox";
 
 import UserList from "../components/UserList";
@@ -100,6 +100,9 @@ class UserManagePage extends Component{
                         Inf={this.props.inf[this.state.currentInfItem]}
                         setPaginationNum={this.setPaginationNum}
                         blockUpUser={this.props.blockUpUser}
+                        resetPassword={this.props.resetPassword}
+                        initFormData={this.props.onInitFormData}
+                        createAccount={this.props.createAccount}
                     />
                     <hr/>
                     <UserList
@@ -133,10 +136,13 @@ function mapDispatchToProps(dispatch){
         editReaderUser : (text,index) => dispatch(editReaderUser(text,index)),
         clearReaderUserStore : () => dispatch(clearReaderUserStore()),
         initializationReaderUser : (data) => dispatch(initializationReaderUser(data)),
+        onInitFormData: (data) => dispatch(initFormData(data)),
+        createAccount : (uri, data) => dispatch(createAccount(uri,data)), 
 
         clearCurrentReaderUserStore : () => dispatch(clearCurrentReaderUserStore()),
         requstInitializationReaderUser : (uri) => dispatch(requstInitializationReaderUser(uri)),
         searchUser : (uri) => dispatch(searchUser(uri)),
+        resetPassword : (uri,index) => dispatch(resetPassword(uri,index)),
         blockUpUser: (uri,data,index) => dispatch(blockUpUser(uri,data,index)),
     }
 }

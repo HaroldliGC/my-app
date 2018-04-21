@@ -23,12 +23,13 @@ const renderField = ({
     label,
     type,
     componentClass,
+    disabled,
     meta: {touched, error, warning}
 }) => (
     <FormGroup>
         <Col sm={4} componentClass={ControlLabel}>{label}</Col>
         <Col sm={8}>
-            <FormControl {...input} placeholder={label} type={type} componentClass={componentClass}/>
+            <FormControl {...input} disabled={disabled} placeholder={label} type={type} componentClass={componentClass}/>
             {touched && error && <HelpBlock ><Glyphicon glyph="exclamation-sign" />{error}</HelpBlock>}
         </Col>
     </FormGroup>
@@ -49,6 +50,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "国际标准书号"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Name"
@@ -56,6 +58,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "书名"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Author"
@@ -63,6 +66,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "作者"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Type"
@@ -70,6 +74,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "分类"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Press"
@@ -77,6 +82,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "出版社"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Number"
@@ -84,14 +90,16 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "书籍总量"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
-                {this.props.inputType !== NEW_BOOK ?
+                {inputType !== NEW_BOOK ?
                 <Field
                     name = "BorrowNumber"
                     type = "number"
                     component = {renderField}
                     label = "借出数量"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />:''}
                 <Field
                     name = "Price"
@@ -99,6 +107,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "标准价格"
                     componentClass = "input"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
                 <Field
                     name = "Info"
@@ -106,6 +115,7 @@ class SyncValidationForm extends PureComponent {
                     component = {renderField}
                     label = "书籍信息"
                     componentClass = "textarea"
+                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
             </Form>
         )
@@ -120,7 +130,7 @@ SyncValidationForm.PropTypes = {
 
 const reduxInputForm = reduxForm({
     form: 'SyncValidationForm',
-    getFormState: (state) => (state.present.form),
+    getFormState: (state) => (state.present.OperateBook.form),
     validate,
     fields,
 })(SyncValidationForm);

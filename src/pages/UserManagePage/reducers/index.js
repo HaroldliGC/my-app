@@ -1,5 +1,6 @@
 import { USER_INIT_FORM, USER_MESSAGE, ADD_READERUSER, DELETE_READERUSER, EDIT_READERUSER, CLEAR_READERUSER_STORE,INITIALIZATION_READERUSER} from '../actions/consts';
 import {combineReducers} from 'redux';
+import { reducer as formReducer} from 'redux-form';
 
 function users (state=[],action){
     switch(action.type){
@@ -61,7 +62,8 @@ function messages (state={content:'',type:''},action){
 const OperateReaderUser = combineReducers({
     users,
     messages,
-    initFormData
+    initFormData,
+    form: formReducer
 })
 
 export default OperateReaderUser;

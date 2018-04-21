@@ -48,6 +48,7 @@ export default class UserList extends Component{
                         <th>姓名</th>
                         <th>状态</th>
                         <th>电话</th>
+                        <th>身份</th>
                     </tr>
                 </thead>
                 <tbody>

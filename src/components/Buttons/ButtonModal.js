@@ -9,16 +9,35 @@ export default class ButtonModal extends Component{
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.handleOption = this.handleOption.bind(this);
     }
     handleClick(){
         this.props.Click();
     }
+    handleOption(option){
+        const type = {
+            normal : false,
+            danger : false,
+            search : false
+        }
+        switch(option){
+            case 'normal':
+                type.normal = true;
+                break;
+            case 'danger':
+                type.danger = true;
+                break;
+            case 'search':
+                type.search = true;
+                break;
+            default:
+        }
+        return type;
+    }
     render(){
-        let normal0 = this.props.type === "normal";
-        let delete0 = (this.props.type === "delete" || this.props.type === "stop");
-        let search0 = this.props.type === "search";
+        const type = this.handleOption(this.props.type);
         return(
-            <button className={cx({functionButton:true,normalButton:normal0,deleteButton:delete0,searchButton:search0})} onClick={this.handleClick}>
+            <button className={cx({functionButton:true,normalButton:type.normal,deleteButton:type.danger,searchButton:type.search})} onClick={this.handleClick}>
                 {this.props.title}
             </button>
         );

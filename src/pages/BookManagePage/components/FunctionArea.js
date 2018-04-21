@@ -45,17 +45,17 @@ export default class FunctionArea extends Component {
                     index={this.props.Index}
                     url="http://localhost:61021/api/Books/putbook/"
                 />
+                 <BookPanel
+                    inputType = {DETAIL_BOOK}
+                    info =  {this.props.Inf}
+                    initFormData={this.props.initFormData}
+                />
                 <DeleteButton
                     index={this.props.Index}
                     handleInfItem={this.props.handleInfItem}
                     deleteBook = {this.props.deleteBook}
                     Inf={this.props.Inf}
                     uri="http://localhost:61021/api/Books/deletebook/"
-                />
-                <BookPanel
-                    inputType = {DETAIL_BOOK}
-                    info =  {this.props.Inf}
-                    initFormData={this.props.initFormData}
                 />
                 {/*
                 <UnRedoButton

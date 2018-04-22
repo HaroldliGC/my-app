@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import classNames from 'classnames/bind';
 import styles from './Root.css';
-
-import Header from "./components/Header/Header";
 import BookManagePage from "./pages/BookManagePage/containers/BookManagePage";
 import UserManagePage from "./pages/UserManagePage/containers/UserManagePage";
 import BusinessPage from "./pages/BusinessPage/containers/BusinessPage";

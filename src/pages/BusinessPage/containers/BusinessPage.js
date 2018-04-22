@@ -32,7 +32,7 @@ class BusinessPage extends Component{
     }
     componentDidMount(){
         //debugger
-        const uri = "http://localhost:26800/api/BusinessOrders/GetBusinessOrders/";
+        const uri = "http://localhost:61021/api/Orders/GetOrders/";
         this.props.requstInitializationOrder(uri);
     }
     handleInfItem(index) {

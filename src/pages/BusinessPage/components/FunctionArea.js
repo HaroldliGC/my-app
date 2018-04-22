@@ -22,7 +22,7 @@ export default class FunctionArea extends Component{
                     handleInfItem={this.props.handleInfItem}
                     deleteOrder = {this.props.deleteOrder}
                     Inf={this.props.Inf}
-                    uri="http://localhost:26800/api/BusinessOrders/DeleteBusinessOrder/"
+                    uri="http://localhost:61021/api/Orders/DeleteOrder/"
                 />
                 <SetPagination
                     setPaginationNum={this.props.setPaginationNum}

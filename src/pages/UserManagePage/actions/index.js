@@ -13,6 +13,9 @@ export function requstInitializationReaderUser(uri){
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
+              if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+              }
               return;
             }
           return response.json();
@@ -27,12 +30,17 @@ export function searchUser(uri){
         return fetch(uri).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
+              if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+              }
               return;
             }
           return response.json();
           }).then(function(data){
               //console.log("returnData:",data);
-            dispatch(initializationReaderUser(data));
+              if (data !== undefined){
+                dispatch(initializationReaderUser(data));
+              }
           });
     }
 }
@@ -45,6 +53,9 @@ export function blockUpUser(uri,formData,index){
             //console.log("用户状态改变：",response)
             if (response.status !== 200) {
                 console.log("request " + uri + "error! status: " + response.status);
+                if (response.status === 401) {
+                    dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+                }
                 return;
             }
             return response.json();
@@ -68,6 +79,9 @@ export function resetPassword(uri,index){
         return serviceApi(uri,{method:'PUT'})
             .then(function(response){
                 console.log("request " + uri + " status: " + response.status);
+                if (response.status === 401) {
+                    dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+                }
                 return response.json();
             }).then(function(data){
                 console.log("重置密码：",data)

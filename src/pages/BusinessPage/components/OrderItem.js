@@ -44,9 +44,12 @@ export default class OrderItem extends Component{
             <tr onClick={this.handleClick} className={cx({itemBackground:haveBackground,tr_oncheck:select})}>
                 <th>{this.props.Information.Id}</th>
                 <th>{this.props.Information.Book.Name}</th>
-                <th>{this.props.Information.ReaderUser.Name}</th>
+                <th>{this.props.Information.User.Name}</th>
+                <th>{this.props.Information.State}</th>
+                {/*
                 <th>{businessState}</th>
                 <th>{orderState}</th>
+                */}
             </tr>
         )
     }

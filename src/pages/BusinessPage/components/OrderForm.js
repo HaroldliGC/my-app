@@ -25,7 +25,7 @@ export default class OrderForm extends Component{
                         用户名:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" defaultValue={this.props.Inf.ReaderUser.Name}>
+                        <FormControl type="text" defaultValue={this.props.Inf.User.Name}>
                             
                         </FormControl>
                     </Col>
@@ -40,22 +40,12 @@ export default class OrderForm extends Component{
                         </FormControl>
                     </Col>
                 </FormGroup>
-                <FormGroup key="businessState">
-                    <Col componentClass={ControlLabel} sm={4}>
-                        业务状态:
-                    </Col>
-                    <Col sm={8}>
-                        <FormControl type="text" defaultValue={this.props.Inf.BusinessState}>
-                            
-                        </FormControl>
-                    </Col>
-                </FormGroup>
                 <FormGroup key="orderState">
                     <Col componentClass={ControlLabel} sm={4}>
                         订单状态:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" defaultValue={this.props.Inf.OrderState}>
+                        <FormControl type="text" defaultValue={this.props.Inf.State}>
                             
                         </FormControl>
                     </Col>

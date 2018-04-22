@@ -12,13 +12,18 @@ export function requstInitializationData(uri){
     return (dispatch) => {
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
-              console.log("request " + uri + "error! status: " + response.status);
-              return;
+                console.log("request " + uri + "status: " + response.status);
+                if (response.status === 401) {
+                    dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+                }
+                return;
             }
           return response.json();
           }).then(function(data){
               console.log("InitializationData:",data);
-          dispatch(initializationData(data));
+              if (data !== undefined){
+                dispatch(initializationData(data));
+              }
           });
     }
 }
@@ -27,8 +32,11 @@ export function postNewBook(uri,formData){
     return (dispatch) => {
         return serviceApi(uri,{method:'POST',body:JSON.stringify(formData)}).then(function (response){
             if (response.status !== 201) {
-              console.log("request " + uri + "error! status: " + response.status);
-              return;
+                console.log("request " + uri + "error! status: " + response.status);
+                if (response.status === 401) {
+                    dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+                }
+                return;
             }
           return response.json();
           }).then(function(data){
@@ -51,6 +59,9 @@ export function deleteBook(uri,index){
         return serviceApi(uri,{method:'DELETE'}).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
+              if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+              }
               return;
             }
           return response.json();
@@ -66,9 +77,12 @@ export function updateBook(uri,formData,index){
         return serviceApi(uri,{method: 'PUT', body: JSON.stringify(formData)}).then(function (response){
             if (response.status !== 204) {
               console.log("request " + uri + "error! status: " + response.status);
+              if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+              }
               return;
             } else {
-                console.log("put return data:",response)
+                console.log("put return data:",response.json())
                 dispatch(editInf(formData,index));
                 dispatch(showMessage('书籍信息更新成功','success'));
             }
@@ -82,12 +96,17 @@ export function searchBook(uri){
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
+              if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+              }
               return;
             }
           return response.json();
           }).then(function(data){
               //console.log("returnData:",data);
-            dispatch(initializationData(data));
+              if (data !== undefined){
+                dispatch(initializationData(data));
+              }
           });
     }
 }

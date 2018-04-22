@@ -47,7 +47,6 @@ export default class OrderList extends Component{
                         <th>订单号</th>
                         <th>书籍名</th>
                         <th>用户名</th>
-                        <th>业务状态</th>
                         <th>订单状态</th>
                     </tr>
                 </thead>

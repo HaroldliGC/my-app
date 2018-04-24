@@ -27,7 +27,7 @@ export function requstInitializationReaderUser(uri){
 //根据条件进行数据查询
 export function searchUser(uri){
     return (dispatch) => {
-        return fetch(uri).then(function (response){
+        return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
               console.log("request " + uri + "error! status: " + response.status);
               if (response.status === 401) {

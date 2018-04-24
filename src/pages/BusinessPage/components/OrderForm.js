@@ -3,11 +3,38 @@ import PropTypes from 'prop-types';
 import {Form,FormGroup,Col,ControlLabel,FormControl,} from 'react-bootstrap';
 
 export default class OrderForm extends Component{
+    constructor(props){
+        super(props);
+        this.handleState = this.handleState.bind(this);
+    }
+
+    handleState(str){
+        let rec = '';
+        switch(str){
+            case 'done':
+                rec = '归还';
+                break;
+            case 'renting':
+                rec = '租借中';
+                break;
+            case 'overdone':
+                rec = '逾期归还';
+                break;
+            case 'overdue':
+                rec = '逾期';
+                break;
+            default:
+                rec = 'default';
+        }
+        return rec;
+    }
+    
     render(){
         var show = true;
         if (this.props.Inf.OrderState==="unfinished"){
             show = false;
         }
+        
         return(
             <Form horizontal id="OrderForm">
                 <FormGroup key="orderId">
@@ -45,7 +72,7 @@ export default class OrderForm extends Component{
                         订单状态:
                     </Col>
                     <Col sm={8}>
-                        <FormControl type="text" defaultValue={this.props.Inf.State}>
+                        <FormControl type="text" defaultValue={this.handleState(this.props.Inf.State)}>
                             
                         </FormControl>
                     </Col>

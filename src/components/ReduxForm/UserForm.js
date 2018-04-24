@@ -6,6 +6,9 @@ import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Glyphicon, Help
 import {connect} from 'react-redux';
 import {Field ,reduxForm} from 'redux-form';
 import {EDIT_USER ,DETAIL_USER, NEW_USER} from '../../common/OperateKeys';
+import styles from './BookPanel.css';
+
+const cx = className.bind(styles);
 
 const validate = values => {
     const errors = {};
@@ -42,7 +45,7 @@ const renderField = ({
         <Col sm={4} componentClass={ControlLabel}>{label}</Col>
         <Col sm={8}>
             <FormControl {...input} disabled={disabled} placeholder={label} type={type}/>
-            {touched && error && <HelpBlock ><Glyphicon glyph="exclamation-sign" />{error}</HelpBlock>}
+            {touched && error && <HelpBlock className={cx({helpBlock: true})}><Glyphicon glyph="exclamation-sign" />{error}</HelpBlock>}
         </Col>
     </FormGroup>
 )
@@ -61,7 +64,7 @@ const renderFieldSelect = ({
                 <option value = {option.first}>{option.first}</option>
                 <option value = {option.second}>{option.second}</option>
             </FormControl>
-            {touched && error && <HelpBlock ><Glyphicon glyph="exclamation-sign" />{error}</HelpBlock>}
+            {touched && error && <HelpBlock className={cx({helpBlock: true})}><Glyphicon glyph="exclamation-sign" />{error}</HelpBlock>}
         </Col>
     </FormGroup>
 )

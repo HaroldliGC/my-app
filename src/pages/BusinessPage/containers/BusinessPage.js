@@ -1,9 +1,10 @@
+import NotificationSystem from 'react-notification-system';
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from './BusinessPage.css';
-import {addOrder,deleteOrder,editOrder,clearOrderStore,initializationOrder} from '../actions/consts';
-import {requstInitializationOrder,searchOrder,deleteOrderRequst} from '../actions/index';
+import {initFormData,addOrder,deleteOrder,editOrder,clearOrderStore,initializationOrder} from '../actions/consts';
+import {editOrderRequest,requstInitializationOrder,searchOrder,deleteOrderRequst,addOrderRequest} from '../actions/index';
 import SearchBox from "../../../components/SearchBox/SearchBox";
 
 import OrderList from '../components/OrderList';
@@ -35,6 +36,30 @@ class BusinessPage extends Component{
         const uri = "http://localhost:61021/api/Orders/GetOrders/";
         this.props.requstInitializationOrder(uri);
     }
+    componentWillReceiveProps(nextProps){
+        //debugger
+        if (nextProps.messages.content !== ''){
+          const message = nextProps.messages;
+          let mylevel = '';
+          switch(message.type){
+            case 'success':
+              mylevel = 'success';
+              break;
+            case 'error':
+              mylevel = 'error';
+              break;
+            default:
+              mylevel = 'info';
+          }
+          this.notificationSystem.addNotification({
+            title: '业务管理',
+            message: message.content,
+            level: mylevel
+          })
+          message.content = '';
+          message.type = '';
+        }
+    }
     handleInfItem(index) {
         let infItem = parseInt(index);
         this.setState({ currentInfItem: infItem });
@@ -55,6 +80,7 @@ class BusinessPage extends Component{
         const searchItemNames = new Array("姓名","书名");
         return(
             <div>
+                <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
                 <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
                 <div className={cx({appBody3:true})}>
                     <div classNaME={cx({appHead3:true})}>
@@ -63,7 +89,7 @@ class BusinessPage extends Component{
                         itemNames={searchItemNames}
                         search={this.props.searchOrder}
                         Title="order"
-                        uri="http://localhost:26800/api/BusinessOrders/GetBusinessOrderBySearch/" 
+                        uri="http://localhost:61021/api/Orders/GetBusinessOrderBySearch/" 
                         />
                     </div>
                     <FunctionArea
@@ -72,6 +98,9 @@ class BusinessPage extends Component{
                         handleInfItem={this.handleInfItem}
                         deleteOrder={this.props.deleteOrderRequst}
                         setPaginationNum={this.setPaginationNum}
+                        initFormData={this.props.onInitFormData}
+                        addOrderRequest={this.props.addOrderRequest}
+                        editOrderRequest={this.props.editOrderRequest}
                     />
                     <hr/>
                     <OrderList
@@ -91,7 +120,8 @@ class BusinessPage extends Component{
 function mapStateToProps(state) {
     //console.log("state:",state.present.OperateBook)
     return {
-      inf: state.present.OperateOrder,
+      inf: state.present.OperateOrder.orders,
+      messages: state.present.OperateOrder.messages,
       //length: state.length,
       pastLength : state.past.length,
       futureLength : state.future.length,
@@ -104,11 +134,13 @@ function mapDispatchToProps(dispatch){
         editOrder : (text,index) => dispatch(editOrder(text,index)),
         clearOrderStore : () => dispatch(clearOrderStore()),
         initializationOrder : (data) => dispatch(initializationOrder(data)),
+        onInitFormData: (data) => dispatch(initFormData(data)),
+        editOrderRequest : (uri, index) => dispatch(editOrderRequest(uri, index)),
 
         requstInitializationOrder : (uri) => dispatch(requstInitializationOrder(uri)),
         searchOrder : (uri) => dispatch(searchOrder(uri)),
         deleteOrderRequst : (uri,index) => dispatch(deleteOrderRequst(uri,index)),
-
+        addOrderRequest : (uri, formData) => dispatch(addOrderRequest(uri, formData)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessPage);

@@ -45,7 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return{
-        requstLogin: (data) => dispatch(requstLogin(data)),
+        requstLogin: (data,formData) => dispatch(requstLogin(data,formData)),
         loginAction: (str) => dispatch(loginAction(str)),
     }
 }

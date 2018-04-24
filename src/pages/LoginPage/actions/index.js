@@ -1,4 +1,4 @@
-import {loginAuth, getToken} from '../../../common/utils';
+import {loginAuth, getToken, serviceApi} from '../../../common/utils';
 
 export const LOGIN = "LOGIN";
 const address = "http://localhost:61021/";
@@ -10,8 +10,10 @@ export function loginAction(str){
 }
 
 //登陆验证
-export function requstLogin(data){
+export function requstLogin(data,formData){
+    const userInf = {Account:formData.username,Password:formData.password}
     let recState = 'success';
+    let Token = '';
     const uri = `${address}token`;
     const myHeader = new Headers({
         'Accept': 'application/json',
@@ -32,9 +34,26 @@ export function requstLogin(data){
           }).then(function(data){
             dispatch(loginAction(recState));
             if (recState === 'success') {
+                Token = data.access_token;
+                serviceApi(`${address}api/Login/ManagerLogin`,{method:'POST',body:JSON.stringify(userInf)}
+                ).then(function(response){
+                    return response.json();
+                }).then(function(data){
+                    console.log("data:",data)
+                    if (data === 'success'){
+                        loginAuth(Token);
+                        window.location.pathname = "/BookManagePage";
+                        recState = 'success';
+                    } else {
+                        recState = 'failed';
+                    }
+                    dispatch(loginAction(recState));
+                })
+                /*
                 console.log("recToen",data)
                 loginAuth(data.access_token);
                 window.location.pathname = "/BookManagePage";
+                */
             }
           });
     }

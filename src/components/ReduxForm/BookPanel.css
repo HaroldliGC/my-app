@@ -18,3 +18,14 @@
 .searchButton{
     background: rgb(255,150,52);
 }
+
+.helpBlock {
+    color: #a94442;
+    display: flex;
+    align-items: baseline;
+  
+    & > span {
+      margin-right: 4px;
+      top: 2px;
+    }
+}

@@ -33,7 +33,7 @@ export default class LoginForm extends Component{
             'password': userPassword,
         }
         const formData = this.serializeObj(data);
-        this.props.search(formData);
+        this.props.search(formData,data);
     }
     render(){
         return(

@@ -17,10 +17,36 @@ export default class OrderItem extends Component{
             onSelect:false,
         };
         this.handleClick = this.handleClick.bind(this);
+        this.handleIcon = this.handleIcon.bind(this);
     }
     handleClick(event){
         this.props.handleInfItem(this.props.index);
         this.setState({onSelect:true})
+    }
+    handleIcon(str){
+        const rec = {};
+        switch(str){
+            case 'done':
+                rec.Icon = isAllDone;
+                rec.Title = "归还";
+                break;
+            case 'renting':
+                rec.Icon = greennotice;
+                rec.Title = "租借中";
+                break;
+            case 'overdue':
+                rec.Icon = rednotice;
+                rec.Title = "逾期";
+                break;
+            case 'overdone':
+                rec.Icon = hasReject;
+                rec.Title = "逾期归还";
+                break;
+            default:
+                rec.Icon = rednotice;
+                rec.Title = "defaultTitle";
+        }
+        return rec;
     }
     render(){
         //设置样式
@@ -30,22 +56,16 @@ export default class OrderItem extends Component{
         }
         var select = this.props.index == this.props.currentItem;
         //设置Icon
-        let orderIcon = hasReject;
-        if (this.props.Information.OrderState === 'finished') {
-            orderIcon = isAllDone;
-        }
-        const orderState = <div><span><Image className={cx({icon: true})} src={orderIcon}/>{this.props.Information.OrderState}</span></div>;
-        let businessIcon = greennotice;
-        if (this.props.Information.BusinessState === 'overTime') {
-            businessIcon = rednotice;
-        }
-        const businessState = <div><span><Image className={cx({icon: true})} src={businessIcon}/>{this.props.Information.BusinessState}</span></div>;
+        let orderIcon = this.handleIcon(this.props.Information.State);
+        const orderState = <div><span><Image className={cx({icon: true})} src={orderIcon.Icon}/>{orderIcon.Title}</span></div>;
         return(
             <tr onClick={this.handleClick} className={cx({itemBackground:haveBackground,tr_oncheck:select})}>
                 <th>{this.props.Information.Id}</th>
                 <th>{this.props.Information.Book.Name}</th>
+                <th>{this.props.Information.Book.Isbn}</th>
                 <th>{this.props.Information.User.Name}</th>
-                <th>{this.props.Information.State}</th>
+                <th>{this.props.Information.User.Account}</th>
+                <th>{orderState}</th>
                 {/*
                 <th>{businessState}</th>
                 <th>{orderState}</th>

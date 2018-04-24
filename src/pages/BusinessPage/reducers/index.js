@@ -1,6 +1,8 @@
-import { ADD_ORDER, DELETE_ORDER, EDIT_ORDER, CLEAR_ORDER_STORE, INITIALIZATION_ORDER} from '../actions/consts';
+import {ORDER_MESSAGE, ORDER_INIT_FORM ,ADD_ORDER, DELETE_ORDER, EDIT_ORDER, CLEAR_ORDER_STORE, INITIALIZATION_ORDER} from '../actions/consts';
+import {combineReducers} from 'redux';
+import { reducer as formReducer} from 'redux-form';
 
-export default function OperateOrder (state=[],action){
+function orders (state=[],action){
     switch(action.type){
         case ADD_ORDER:
             return [...state,action.array];
@@ -31,3 +33,37 @@ export default function OperateOrder (state=[],action){
             return state;
     }
 }
+
+function initFormData (state={}, action){
+    let newState = {...state};
+    switch(action.type){
+        case ORDER_INIT_FORM:
+            newState = action.data;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+function messages (state={content:'',type:''},action){
+    let newState = {...state};
+    switch(action.type){
+        case ORDER_MESSAGE:
+            newState.content = action.content;
+            newState.type = action.messageType;
+            break;
+        default:
+            return state;
+    }
+    return newState;
+}
+
+const OperateOrder = combineReducers({
+    orders,
+    messages,
+    initFormData,
+    form: formReducer
+})
+
+export default OperateOrder;

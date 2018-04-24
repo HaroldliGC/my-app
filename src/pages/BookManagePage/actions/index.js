@@ -82,7 +82,6 @@ export function updateBook(uri,formData,index){
               }
               return;
             } else {
-                console.log("put return data:",response.json())
                 dispatch(editInf(formData,index));
                 dispatch(showMessage('书籍信息更新成功','success'));
             }

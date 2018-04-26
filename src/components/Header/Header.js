@@ -27,6 +27,7 @@ export default class Header extends PureComponent{
         const select1 = currentPath === "/BookManagePage";
         const select2 = currentPath === "/UserManagePage";
         const select3 = currentPath === "/BusinessManagePage";
+        const select4 = currentPath === "/AnalysisPage";
         return(
             <div>
                 <div className={cx({appTitle:true})}>
@@ -55,6 +56,14 @@ export default class Header extends PureComponent{
                         >
                             <NavLink
                                 title="业务管理界面" filter="BusinessManagePage"
+                            >
+                            </NavLink>
+                        </div>
+                        <div
+                            className={cx({menuItem: true, navLinkWrapper: true, selectedItem:select4})}
+                        >
+                            <NavLink
+                                title="业务分析界面" filter="AnalysisPage"
                             >
                             </NavLink>
                         </div>

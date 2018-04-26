@@ -1,4 +1,5 @@
 import {LSKEY_ACCESS_TOKEN} from './StorageKeys';
+export const HOST = 'http://localhost:61021/';
 
 export const loginAuth = (token) => {
     localStorage.setItem(LSKEY_ACCESS_TOKEN,token);

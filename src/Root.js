@@ -8,6 +8,7 @@ import BookManagePage from "./pages/BookManagePage/containers/BookManagePage";
 import UserManagePage from "./pages/UserManagePage/containers/UserManagePage";
 import BusinessPage from "./pages/BusinessPage/containers/BusinessPage";
 import LoginPage from "./pages/LoginPage/containers/LoginPage";
+import AnalysisPage from "./pages/AnalysisPage/containers/AnalysisPage";
 
 const cx = classNames.bind(styles);
 
@@ -37,6 +38,7 @@ export default class Root extends Component{
                 <Route path="/BookManagePage" component={BookManagePage} />
                 <Route path="/UserManagePage" component={UserManagePage}/>
                 <Route path="/BusinessManagePage" component={BusinessPage}/>
+                <Route path="/AnalysisPage" component={AnalysisPage}/>
                 </div>
             </Router>
         </Provider>

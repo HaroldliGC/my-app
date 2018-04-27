@@ -8,8 +8,8 @@ import AddNewButton from '../../../components/Buttons/AddNewButton';
 
 import SetPagination from '../../../components/SetPagination';
 import UnRedoButton from './UnRedoButton';
-
 import DetailsForm from "./DetailsForm";
+import FileUpload from '../../../components/FileUpload/FileUpload';
 
 import {NEW_BOOK, EDIT_BOOK, DETAIL_BOOK, DELETE_BOOK} from '../../../common/OperateKeys';
 import BookPanel from '../../../components/ReduxForm/BookPanel';
@@ -49,6 +49,11 @@ export default class FunctionArea extends Component {
                     inputType = {DETAIL_BOOK}
                     info =  {this.props.Inf}
                     initFormData={this.props.initFormData}
+                />
+                 <FileUpload
+                    info = {this.props.Inf}
+                    index={this.props.Index}
+                    todo={this.props.postBookImg}
                 />
                 <DeleteButton
                     index={this.props.Index}

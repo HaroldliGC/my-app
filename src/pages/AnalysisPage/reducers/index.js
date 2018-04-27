@@ -1,4 +1,4 @@
-import {INIT_BOOK_BY_NUMBER, INIT_BOOK_BY_REVIEW, ANALYSIS_MESSAGE} from '../actions/consts';
+import { INIT_BOOK_BY_ALLNUMBER, INIT_BOOK_BY_NUMBER, INIT_BOOK_BY_REVIEW, ANALYSIS_MESSAGE} from '../actions/consts';
 import {combineReducers} from 'redux';
 
 function bookByNumber (state=[], action){
@@ -27,6 +27,19 @@ function bookByReview (state=[], action){
     return newState;
 }
 
+function bookByAll (state=[], action){
+    let newState = state.concat();
+    switch(action.type){
+        case INIT_BOOK_BY_ALLNUMBER:{
+            newState = action.data;
+            break;
+        }
+        default:
+            return state;
+    }
+    return newState;
+}
+
 function messages (state={content:'',type:''},action){
     let newState = {...state};
     switch(action.type){
@@ -43,6 +56,7 @@ function messages (state={content:'',type:''},action){
 const OperateAnalysis = combineReducers({
     bookByNumber,
     bookByReview,
+    bookByAll,
     messages
 })
 

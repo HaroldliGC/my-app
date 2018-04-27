@@ -1,5 +1,5 @@
 import {showMessage, newOperatorAction, deleteInfItem, editInf, initializationData, clearStore } from "./consts";
-import {getToken, serviceApi} from '../../../common/utils';
+import {HOST, getToken, serviceApi} from '../../../common/utils';
 
 //画面跳转时清空store
 export function clearCurrentStore(){
@@ -107,5 +107,36 @@ export function searchBook(uri){
                 dispatch(initializationData(data));
               }
           });
+    }
+}
+
+//上传书籍封面
+export function postBookImg(formdata,id){
+    const uri = `${HOST}api/BookImages/PostBookImageByManager/${id}`;
+    const token = getToken();
+    return (dispatch) => {
+        return fetch(uri,{
+            method: 'POST',
+            body: formdata,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(function (response){
+            console.log("request " + uri + "  status: " + response.status);
+            if (response.status === 401) {
+                dispatch(showMessage("登陆凭证过期，请重新登陆",'info'));
+                return;
+            }
+            return response.json();
+        }).then(function(data){
+            console.log("data",data);
+            if (data!==undefined){
+                if (data.type === 'success'){
+                    dispatch(showMessage(data.message,'success'));
+                } else {
+                    dispatch(showMessage(data.message,'error'));
+                }
+            }
+        })
     }
 }

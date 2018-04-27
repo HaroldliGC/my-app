@@ -4,7 +4,7 @@ import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 import "../CSS/App.css";
 import { connect } from 'react-redux';
 import { initFormData, newOperatorAction, editInf, deleteInfItem, initializationData, undoAction, redoAction} from "../actions/consts";
-import { postNewBook, deleteBook, updateBook, requstInitializationData, clearCurrentStore, searchBook} from "../actions/index";
+import { postBookImg, postNewBook, deleteBook, updateBook, requstInitializationData, clearCurrentStore, searchBook} from "../actions/index";
 
 import BookList from "../components/BookList";
 import FunctionArea from '../components/FunctionArea';
@@ -114,6 +114,7 @@ class BookManagePage extends Component {
               postNewBook={this.props.postNewBook}
               deleteBook={this.props.deleteBook}
               updateBook={this.props.updateBook}
+              postBookImg={this.props.postBookImg}
 
               errors={this.props.errors}
             />
@@ -167,6 +168,7 @@ function mapDispatchToProps(dispatch) {
     deleteBook : (uri,index) => dispatch(deleteBook(uri,index)),
     updateBook:(uri,data,index) => dispatch(updateBook(uri,data,index)),
     searchBook:(uri) => dispatch(searchBook(uri)),
+    postBookImg: (formdata,id) => dispatch(postBookImg(formdata,id)),
 
     clearCurrentStore: () => dispatch(clearCurrentStore()),
   }

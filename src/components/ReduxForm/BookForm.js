@@ -120,14 +120,6 @@ class SyncValidationForm extends PureComponent {
                     componentClass = "textarea"
                     disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
                 />
-                <Field
-                    name = "Image"
-                    type = "file"
-                    component = {renderField}
-                    label = "书籍封面图片选择"
-                    componentClass = "input"
-                    disabled = {inputType === DETAIL_BOOK ? "disabled" : ""}
-                />
             </Form>
         )
     }

@@ -20,7 +20,9 @@ export function requstInitializationReaderUser(uri){
             }
           return response.json();
           }).then(function(data){
-          dispatch(initializationReaderUser(data));
+              if (data!=undefined){
+                dispatch(initializationReaderUser(data));
+              }
           });
     }
 }

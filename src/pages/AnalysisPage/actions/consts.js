@@ -1,5 +1,7 @@
 export const INIT_BOOK_BY_NUMBER = "INIT_BOOK_BY_NUMBER";
 export const INIT_BOOK_BY_REVIEW = "INIT_BOOK_BY_REVIEW";
+export const INIT_BOOK_BY_ALLNUMBER = "INIT_BOOK_BY_ALLNUMBER";
+
 export const ANALYSIS_MESSAGE = "ANALYSIS_MESSAGE";
 
 export function initBookByNumber(data){
@@ -12,6 +14,13 @@ export function initBookByNumber(data){
 export function initBookByReview(data){
     return{
         type: INIT_BOOK_BY_REVIEW,
+        data
+    }
+}
+
+export function initBookByAllNumber(data){
+    return {
+        type: INIT_BOOK_BY_ALLNUMBER,
         data
     }
 }

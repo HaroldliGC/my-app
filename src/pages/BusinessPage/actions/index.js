@@ -14,7 +14,9 @@ export function requstInitializationOrder(uri){
             }
             return response.json();
         }).then(function(data){
-            dispatch(initializationOrder(data));
+            if (data!==undefined){
+                dispatch(initializationOrder(data));
+            }
         });
     }
 }
@@ -32,7 +34,9 @@ export function searchOrder(uri){
           return response.json();
           }).then(function(data){
               //console.log("returnData:",data);
-            dispatch(initializationOrder(data));
+            if (data!==undefined){
+                dispatch(initializationOrder(data));
+            }
           });
     }
 }

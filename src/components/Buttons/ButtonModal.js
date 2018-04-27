@@ -37,7 +37,7 @@ export default class ButtonModal extends Component{
     render(){
         const type = this.handleOption(this.props.type);
         return(
-            <button className={cx({functionButton:true,normalButton:type.normal,deleteButton:type.danger,searchButton:type.search})} onClick={this.handleClick}>
+            <button className={cx({functionButtoner:true,normalButtoner:type.normal,deleteButtoner:type.danger,searchButtoner:type.search})} onClick={this.handleClick}>
                 {this.props.title}
             </button>
         );

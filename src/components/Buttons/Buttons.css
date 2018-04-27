@@ -1,12 +1,12 @@
-.deleteButton{
+.deleteButtoner{
     background: rgb(245,105,85);
 }
 
-.normalButton{
+.normalButtoner{
     background: rgb(88,156,218);
 }
 
-.functionButton{
+.functionButtoner{
     width:88px;
     height:34px;
     padding: 6px 12px;
@@ -15,6 +15,6 @@
     margin-right: 10px;
 }
 
-.searchButton{
+.searchButtoner{
     background: rgb(255,150,52);
 }

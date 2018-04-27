@@ -6,6 +6,13 @@ import {initBookByNumber, initBookByReview} from '../actions/consts';
 import {getBookByNumber,getBookByReview} from '../actions/index';
 
 import Header from '../../../components/Header/Header';
+import BookByNumberCharts from '../components/BookByNumberCharts';
+import BookByReviewCharts from '../components/BookByReviewCharts';
+import classNames from 'classnames/bind';
+
+import styles from './AnalysisPage.css';
+
+const cx = classNames.bind(styles);
 
 class AnalysisPage extends Component{
     constructor(props){
@@ -29,6 +36,14 @@ class AnalysisPage extends Component{
             <div>
                 <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
                 <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
+                <div className={cx({appBody4:true})}>
+                    <BookByNumberCharts
+                        Inf={this.props.bookByNumber}
+                    />
+                    <BookByReviewCharts
+                        Inf={this.props.bookByReview}
+                    />
+                </div>
             </div>
         );
     }

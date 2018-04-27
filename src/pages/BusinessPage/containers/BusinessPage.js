@@ -83,7 +83,7 @@ class BusinessPage extends Component{
                 <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
                 <Header path={this.state.currentPath} updateCurrentPath={this.updateCurrentPath}/>
                 <div className={cx({appBody3:true})}>
-                    <div classNaME={cx({appHead3:true})}>
+                    <div className={cx({appHead3:true})}>
                         <SearchBox
                         itemIds={searchItemIds}
                         itemNames={searchItemNames}

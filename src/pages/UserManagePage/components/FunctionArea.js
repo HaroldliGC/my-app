@@ -1,11 +1,9 @@
 import React, { Component} from "react";
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
 import styles from './FunctionArea.css';
 import classNames from 'classnames/bind';
 
 import SetPagination from '../../../components/SetPagination';
-import UserInfModal from './UserInfModal';
 import StateCtr from './StateCtr';
 import {STOP_USER, RECOVER_USER, RESET_PASSWORD} from '../../../common/OperateKeys';
 
@@ -21,7 +19,6 @@ export default class FunctionArea extends Component{
                 <UserPanel
                     inputType = {NEW_USER}
                     todo = {this.props.createAccount}
-                    url = "http://localhost:61021/api/Users/PostUser/"
                     info = {this.props.Inf}
                     initFormData={this.props.initFormData}
                 />
@@ -40,7 +37,6 @@ export default class FunctionArea extends Component{
                     Inf = {this.props.Inf}
                     index = {this.props.Index}
                     todo = {this.props.resetPassword}
-                    uri = "http://localhost:61021/api/Users/PutUserResetPassword/"
                 />
                 <StateCtr
                     title="停用"
@@ -48,7 +44,6 @@ export default class FunctionArea extends Component{
                     Inf = {this.props.Inf}
                     index = {this.props.Index}
                     todo = {this.props.blockUpUser}
-                    uri = "http://localhost:61021/api/Users/PutUserState/"
                 />
                 <StateCtr
                     title="恢复"
@@ -56,7 +51,6 @@ export default class FunctionArea extends Component{
                     Inf = {this.props.Inf}
                     index = {this.props.Index}
                     todo = {this.props.blockUpUser}
-                    uri = "http://localhost:61021/api/Users/PutUserState/"
                 />
                 <SetPagination
                     setPaginationNum={this.props.setPaginationNum}

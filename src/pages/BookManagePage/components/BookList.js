@@ -14,7 +14,7 @@ export default class BookList extends Component{
         var infListGroup = [];
         const colNum = this.props.paginationNum;
         var json = this.props.Inf;
-        if (json!=undefined){
+        if (json!==undefined){
             const infGroup = json;
             //console.log("infGroup:",infGroup);
             const length = infGroup.length;
@@ -37,7 +37,7 @@ export default class BookList extends Component{
                     temp=[];
                 }
             }
-            if (temp.length!=0){
+            if (temp.length!==0){
                 infListGroup.push(temp);
             }
             

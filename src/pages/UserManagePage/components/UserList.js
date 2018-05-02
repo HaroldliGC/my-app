@@ -14,7 +14,7 @@ export default class UserList extends Component{
         var infListGroup = [];
         const colNum = this.props.paginationNum;
         var userInf = this.props.Inf;
-        if (userInf!=undefined){
+        if (userInf!==undefined){
             const infGroup = userInf;
             const length = infGroup.length;
             for (let i=0; i<length; i++){
@@ -35,7 +35,7 @@ export default class UserList extends Component{
                     temp=[];
                 }
             }
-            if (temp.length!=0){
+            if (temp.length!==0){
                 infListGroup.push(temp);
             }    
         }

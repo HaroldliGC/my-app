@@ -1,13 +1,11 @@
-import autoBind from 'react-autobind';
 import className from 'classnames/bind';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import React, {PureComponent} from 'react';
-import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Glyphicon, HelpBlock} from 'react-bootstrap';
+import {Col, ControlLabel, Form, FormControl, FormGroup, Glyphicon, HelpBlock} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-import {BORROW_BOOK, RETURN_BOOK, DETAIL_ORDER} from '../../common/OperateKeys';
-import WjDatePicker from '../WjDatePicker/WjDatePicker';
+import {DETAIL_ORDER} from '../../common/OperateKeys';
 import styles from './BookPanel.css';
 
 const cx = className.bind(styles);

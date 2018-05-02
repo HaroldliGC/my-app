@@ -15,13 +15,13 @@ function orders (state=[],action){
             return rec;
         }
         case DELETE_ORDER:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             let rec = state.concat();
             rec.splice(index,1);
             return rec;
         }
         case EDIT_ORDER:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             let rec = state.concat();
             rec.splice(index,1,action.text);
             return rec;

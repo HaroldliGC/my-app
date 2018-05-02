@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
-import {BORROW_BOOK, RETURN_BOOK, DETAIL_ORDER} from '../../common/OperateKeys';
+import {Modal,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
+import {BORROW_BOOK, DETAIL_ORDER} from '../../common/OperateKeys';
 import classNames from 'classnames/bind';
 import styles from './BookPanel.css';
 import Form from '../ReduxForm/OrderForm';
@@ -61,7 +61,7 @@ class OrderPanel extends Component {
         }
         switch(this.props.inputType) {
             case BORROW_BOOK:
-                this.props.todo(this.props.url,data);
+                this.props.todo(data);
                 break;
             default:
         }
@@ -114,7 +114,6 @@ OrderPanel.PropTypes = {
     todo : PropTypes.func,
     inputType : PropTypes.string,
     info : PropTypes.object,
-    url : PropTypes.string,
     initFormData : PropTypes.func,
     index : PropTypes.number
 }

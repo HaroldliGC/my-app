@@ -51,10 +51,10 @@ export default class OrderItem extends Component{
     render(){
         //设置样式
         let haveBackground = false;
-        if (this.props.index%2==0){
+        if (this.props.index%2===0){
             haveBackground = true;
         }
-        var select = this.props.index == this.props.currentItem;
+        var select = this.props.index === this.props.currentItem;
         //设置Icon
         let orderIcon = this.handleIcon(this.props.Information.State);
         const orderState = <div><span><Image className={cx({icon: true})} src={orderIcon.Icon}/>{orderIcon.Title}</span></div>;

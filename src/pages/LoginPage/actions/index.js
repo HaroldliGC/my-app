@@ -1,7 +1,6 @@
-import {loginAuth, getToken, serviceApi} from '../../../common/utils';
+import {loginAuth, HOST, serviceApi} from '../../../common/utils';
 
 export const LOGIN = "LOGIN";
-const address = "http://localhost:61021/";
 export function loginAction(str){
     return{
         type: LOGIN,
@@ -14,7 +13,7 @@ export function requstLogin(data,formData){
     const userInf = {Account:formData.username,Password:formData.password}
     let recState = 'success';
     let Token = '';
-    const uri = `${address}token`;
+    const uri = `${HOST}token`;
     const myHeader = new Headers({
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -35,7 +34,7 @@ export function requstLogin(data,formData){
             dispatch(loginAction(recState));
             if (recState === 'success') {
                 Token = data.access_token;
-                serviceApi(`${address}api/Login/ManagerLogin`,{method:'POST',body:JSON.stringify(userInf)}
+                serviceApi(`${HOST}api/Login/ManagerLogin`,{method:'POST',body:JSON.stringify(userInf)}
                 ).then(function(response){
                     return response.json();
                 }).then(function(data){

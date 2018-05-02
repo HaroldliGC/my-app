@@ -1,6 +1,5 @@
 import NotificationSystem from 'react-notification-system';
 import React, { Component } from "react";
-import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 import "../CSS/App.css";
 import { connect } from 'react-redux';
 import { initFormData, newOperatorAction, editInf, deleteInfItem, initializationData, undoAction, redoAction} from "../actions/consts";
@@ -8,7 +7,6 @@ import { postBookImg, postNewBook, deleteBook, updateBook, requstInitializationD
 
 import BookList from "../components/BookList";
 import FunctionArea from '../components/FunctionArea';
-import UnRedoButton from '../components/UnRedoButton';
 import Header from '../../../components/Header/Header';
 
 import SearchBox from "../../../components/SearchBox/SearchBox";
@@ -32,9 +30,7 @@ class BookManagePage extends Component {
     this.setState({ currentPath: path });
   }
   componentDidMount(){
-    //debugger
-    const uri = "http://localhost:61021/api/Books/GetBooks";
-    this.props.requstInitializationData(uri);
+    this.props.requstInitializationData();
   }
   componentWillReceiveProps(nextProps){
     //debugger
@@ -66,23 +62,20 @@ class BookManagePage extends Component {
   }
   */
   handlePagination(num) {
-    let pageNum = parseInt(num);
+    let pageNum = parseInt(num, 0);
     this.setState({ page: pageNum });
-    //console.log(this.state.page);
   }
   handleInfItem(index) {
-    let infItem = parseInt(index);
+    let infItem = parseInt(index, 0);
     this.setState({ currentInfItem: infItem });
-    //console.log(this.state.currentInfItem);
   }
   setPaginationNum(num) {
-    let newNum = parseInt(num);
+    let newNum = parseInt(num, 0);
     this.setState({ paginationNum: newNum });
-    //console.log(this.state.paginationNum);
   }
   render() {
-    const searchItemIds = new Array("Name","Author","Type","Press","Isbn");
-    const searchItemNames = new Array("书名","作者","类型","出版社","Isbn");
+    const searchItemIds = ["Name","Author","Type","Press","Isbn"];
+    const searchItemNames = ["书名","作者","类型","出版社","Isbn"];
     return (
       <div>
         <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
@@ -94,7 +87,6 @@ class BookManagePage extends Component {
                 itemNames={searchItemNames}
                 search={this.props.searchBook}
                 Title = "book"
-                uri = "http://localhost:61021/api/Books/getbookbysearch/" 
               />
             </div>
             <FunctionArea
@@ -163,10 +155,10 @@ function mapDispatchToProps(dispatch) {
     onUndo : () => dispatch(undoAction()),
     onRedo : () => dispatch(redoAction()),
 
-    requstInitializationData: (data) => dispatch(requstInitializationData(data)),
-    postNewBook: (uri,data) => dispatch(postNewBook(uri,data)),
-    deleteBook : (uri,index) => dispatch(deleteBook(uri,index)),
-    updateBook:(uri,data,index) => dispatch(updateBook(uri,data,index)),
+    requstInitializationData: () => dispatch(requstInitializationData()),
+    postNewBook: (data) => dispatch(postNewBook(data)),
+    deleteBook : (bookId,index) => dispatch(deleteBook(bookId,index)),
+    updateBook:(bookId,data,index) => dispatch(updateBook(bookId,data,index)),
     searchBook:(uri) => dispatch(searchBook(uri)),
     postBookImg: (formdata,id) => dispatch(postBookImg(formdata,id)),
 

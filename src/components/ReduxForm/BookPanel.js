@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
+import {Modal,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
 import {NEW_BOOK, EDIT_BOOK, DETAIL_BOOK, DELETE_BOOK} from '../../common/OperateKeys';
 import classNames from 'classnames/bind';
 import styles from './BookPanel.css';
@@ -82,11 +82,10 @@ class BookPanel extends Component {
         const newBook = {...book,...formData};
         switch(this.props.inputType){
             case NEW_BOOK:
-                this.props.todo(this.props.url,newBook);
+                this.props.todo(newBook);
                 break;
             case EDIT_BOOK:
-                const url = `${this.props.url}${newBook.Id}`;
-                this.props.todo(url,newBook,this.props.index);
+                this.props.todo(newBook.Id,newBook,this.props.index);
                 break;
             default:
         }
@@ -144,7 +143,6 @@ BookPanel.PropTypes = {
     todo : PropTypes.func,
     inputType : PropTypes.string,
     info : PropTypes.object,
-    url : PropTypes.string,
     initFormData : PropTypes.func,
     index : PropTypes.number
 }

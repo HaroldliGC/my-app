@@ -2,7 +2,7 @@ import React, { PureComponent} from 'react';
 import classNames from 'classnames/bind';
 import styles from './SearchBox.css';
 import PropTypes from 'prop-types';
-import {Panel,Collapse,Body} from 'react-bootstrap';
+import {Panel} from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
@@ -16,26 +16,13 @@ export default class SearchBox extends PureComponent{
     handleClick(event){
         const valueLength = this.props.itemIds.length;
         var value = "";
-        var searchInf = [];
         let data = "?";
         for (let i=0; i<valueLength; i++){
             value = encodeURIComponent(document.getElementById(this.props.Title+this.props.itemIds[i]).value);
             data = data + this.props.itemIds[i] + "=" + value +"&";
-            //searchInf.push(value);
         }
         let newData = data.slice(0,data.length-1);
-        //let data = "?Name"+"="+searchInf[0]+"&Author"+"="+searchInf[1]+"&Type"+"="+searchInf[2]+"&Press"+"="+searchInf[3]+"&Isbn"+"="+searchInf[4];
-        /*
-        let uri = "";
-        let url = "";
-        if (this.props.Title == "book"){
-            uri = "http://localhost:26800/api/Books/getbookbysearch/";
-        }
-        if (this.props.Title == "user"){
-            uri = "http://localhost:26800/api/ReaderUsers/getreaderuserbysearch/";
-        }*/
-        const url = this.props.uri+newData;
-        console.log("url",url);
+        const url = newData;
         this.props.search(url);
     }
     render(){
@@ -95,5 +82,4 @@ SearchBox.PropTypes = {
     itemIds : PropTypes.array,
     itemNames:PropTypes.array,
     Title : PropTypes.string,
-    uri : PropTypes.string,
 }

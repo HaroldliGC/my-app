@@ -9,8 +9,7 @@ export default class ReturnBook extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        const url = `${this.props.uri}${this.props.Inf.Id}`;
-        this.props.todo(url,this.props.index);
+        this.props.todo(this.props.Inf.Id,this.props.index);
     }
     render(){
         return(
@@ -20,7 +19,6 @@ export default class ReturnBook extends Component {
 }
 
 ReturnBook.PropTypes = {
-    uri : PropTypes.string,
     index : PropTypes.number,
     todo : PropTypes.func,
     Inf : PropTypes.object

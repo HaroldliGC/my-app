@@ -1,9 +1,8 @@
-import autoBind from 'react-autobind';
 import className from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import ButtonModal from '../Buttons/ButtonModal';
-import {Image,Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
+import {Image,Modal,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
 
 import styles from './FileUpload.css';
 import addButton from '../../images/addButton.png';

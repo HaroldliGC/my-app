@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
-import {Panel,Collapse,Body} from 'react-bootstrap';
+import {Panel} from 'react-bootstrap';
 
 import ButtonModal from '../../../components/Buttons/ButtonModal';
 

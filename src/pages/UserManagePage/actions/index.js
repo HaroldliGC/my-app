@@ -1,5 +1,5 @@
-import {showMessage,addReaderUser,deleteReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from './consts';
-import {serviceApi,getToken,clearToken} from '../../../common/utils';
+import {showMessage,addReaderUser,editReaderUser,clearReaderUserStore,initializationReaderUser} from './consts';
+import {serviceApi, HOST} from '../../../common/utils';
 
 //画面跳转时清空store
 export function clearCurrentReaderUserStore(){
@@ -8,7 +8,8 @@ export function clearCurrentReaderUserStore(){
     }
 }
 //请求初始化数据
-export function requstInitializationReaderUser(uri){
+export function requstInitializationReaderUser(){
+    const uri = `${HOST}/api/Users/GetUsers/`;
     return (dispatch) => {
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
@@ -20,14 +21,15 @@ export function requstInitializationReaderUser(uri){
             }
           return response.json();
           }).then(function(data){
-              if (data!=undefined){
+              if (data!==undefined){
                 dispatch(initializationReaderUser(data));
               }
           });
     }
 }
 //根据条件进行数据查询
-export function searchUser(uri){
+export function searchUser(url){
+    const uri = `${HOST}api/Users/GetReaderUserBySearch/${url}`;
     return (dispatch) => {
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
@@ -48,7 +50,8 @@ export function searchUser(uri){
 }
 
 //停用读者
-export function blockUpUser(uri,formData,index){
+export function blockUpUser(userId,formData,index){
+    const uri = `${HOST}api/Users/PutUserState/${userId}`;
     return (dispatch) => {
         return serviceApi(uri,{method:'PUT',body: JSON.stringify(formData)})
             .then(function (response){
@@ -76,7 +79,8 @@ export function blockUpUser(uri,formData,index){
 }
 
 //重置密码
-export function resetPassword(uri,index){
+export function resetPassword(userId,index){
+    const uri = `${HOST}api/Users/PutUserResetPassword/${userId}`;
     return (dispatch) => {
         return serviceApi(uri,{method:'PUT'})
             .then(function(response){
@@ -99,7 +103,8 @@ export function resetPassword(uri,index){
 }
 
 //新增用户
-export function createAccount(uri,formData){
+export function createAccount(formData){
+    const uri = `${HOST}api/Users/PostUser/`;
     return (dispatch) => {
         return serviceApi(uri,{method:'POST',body:JSON.stringify(formData)}).then(function (response){
               console.log("request " + uri + " status: " + response.status);

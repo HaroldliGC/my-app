@@ -1,6 +1,6 @@
 import React, { Component} from "react";
-import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
+//import PropTypes from 'prop-types';
+//import { Grid, Row, Col } from 'react-bootstrap';
 import styles from './FunctionArea.css';
 import classNames from 'classnames/bind';
 import SetPagination from '../../../components/SetPagination';
@@ -9,7 +9,7 @@ import DeleteButton from './DeleteButton';
 import OrderModal from './OrderModal';
 import ReturnBook from './ReturnBook';
 
-import {BORROW_BOOK, DETAIL_ORDER, RETURN_BOOK} from '../../../common/OperateKeys';
+import {BORROW_BOOK} from '../../../common/OperateKeys';
 import OrderPanel from '../../../components/ReduxForm/OrderPanel';
 
 const cx = classNames.bind(styles);
@@ -24,13 +24,11 @@ export default class FunctionArea extends Component{
                     info = {this.props.Inf}
                     initFormData={this.props.initFormData}
                     todo = {this.props.addOrderRequest}
-                    url = "http://localhost:61021/api/Business/borrowBookByManager/"
                 />
                 <ReturnBook
                     index={this.props.Index}
                     todo = {this.props.editOrderRequest}
                     Inf = {this.props.Inf}
-                    uri = "http://localhost:61021/api/Business/PutreturnBookByManager/"
                 />
             
                 <OrderModal
@@ -41,7 +39,6 @@ export default class FunctionArea extends Component{
                     handleInfItem={this.props.handleInfItem}
                     deleteOrder = {this.props.deleteOrder}
                     Inf={this.props.Inf}
-                    uri="http://localhost:61021/api/Orders/DeleteOrder/"
                 />
                 <SetPagination
                     setPaginationNum={this.props.setPaginationNum}

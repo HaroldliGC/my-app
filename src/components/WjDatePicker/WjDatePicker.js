@@ -24,7 +24,7 @@ class WjDatePicker extends Component{
     format: 'yyyy/MM/dd'
   }
 
-  static propTypes = {
+  static PropTypes = {
     controlType: PropTypes.func.isRequired,
     initialValue: PropTypes.any,
     name: PropTypes.string,

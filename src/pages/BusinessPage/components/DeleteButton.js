@@ -9,8 +9,7 @@ export default class DeleteButton extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        const uri = this.props.uri + this.props.Inf.Id;
-        this.props.deleteOrder(uri,this.props.index);
+        this.props.deleteOrder(this.props.Inf.Id,this.props.index);
         this.props.handleInfItem(0);
     }
     render(){
@@ -24,5 +23,4 @@ DeleteButton.PropTypes = {
     deleteOrder : PropTypes.func,
     index : PropTypes.number,
     Inf : PropTypes.number,
-    uri : PropTypes.string,
 }

@@ -24,11 +24,9 @@ export default class StateCtr extends Component{
                 default:
                     data.State = "default_state";
             }
-            const uri = this.props.uri + data.Id;
-            this.props.todo(uri,data,this.props.index);
+            this.props.todo(data.Id,data,this.props.index);
         } else {
-            const uri = `${this.props.uri}${this.props.Inf.Id}`;
-            this.props.todo(uri,this.props.index);
+            this.props.todo(this.props.Inf.Id,this.props.index);
         } 
     }
     handleOption(option){
@@ -52,7 +50,6 @@ export default class StateCtr extends Component{
 }
 
 StateCtr.PropTypes = {
-    uri : PropTypes.string,
     index : PropTypes.number,
     Inf : PropTypes.object,
     todo : PropTypes.func,

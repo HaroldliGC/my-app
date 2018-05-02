@@ -8,7 +8,8 @@ export function clearCurrentStore(){
     }
 }
 //请求初始化数据
-export function requstInitializationData(uri){
+export function requstInitializationData(){
+    const uri = `${HOST}api/Books/GetBooks`;
     return (dispatch) => {
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {
@@ -28,7 +29,8 @@ export function requstInitializationData(uri){
     }
 }
 //上传一条消息到服务器，post新书数据
-export function postNewBook(uri,formData){
+export function postNewBook(formData){
+    const uri = `${HOST}api/Books/PostBook`;
     return (dispatch) => {
         return serviceApi(uri,{method:'POST',body:JSON.stringify(formData)}).then(function (response){
             if (response.status !== 201) {
@@ -54,7 +56,8 @@ export function postNewBook(uri,formData){
 }
 
 //删除图书信息
-export function deleteBook(uri,index){
+export function deleteBook(bookId,index){
+    const uri = `${HOST}/api/Books/deletebook/${bookId}`;
     return (dispatch) => {
         return serviceApi(uri,{method:'DELETE'}).then(function (response){
             if (response.status !== 200) {
@@ -72,7 +75,8 @@ export function deleteBook(uri,index){
     }
 }
 //更新图书信息
-export function updateBook(uri,formData,index){
+export function updateBook(bookId,formData,index){
+    const uri = `${HOST}api/Books/putbook/${bookId}`;
     return (dispatch) => {
         return serviceApi(uri,{method: 'PUT', body: JSON.stringify(formData)}).then(function (response){
             if (response.status !== 204) {
@@ -90,7 +94,8 @@ export function updateBook(uri,formData,index){
     }
 }
 //根据条件进行数据查询
-export function searchBook(uri){
+export function searchBook(url){
+    const uri = `${HOST}api/Books/getbookbysearch/${url}`
     return (dispatch) => {
         return serviceApi(uri).then(function (response){
             if (response.status !== 200) {

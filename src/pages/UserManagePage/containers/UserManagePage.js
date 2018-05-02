@@ -32,9 +32,7 @@ class UserManagePage extends Component{
         this.setState({ currentPath: path });
     }
     componentDidMount(){
-        //debugger
-        const uri = "http://localhost:61021/api/Users/GetUsers/";
-        this.props.requstInitializationReaderUser(uri);
+        this.props.requstInitializationReaderUser();
     }
     componentWillReceiveProps(nextProps){
         //debugger
@@ -64,23 +62,23 @@ class UserManagePage extends Component{
         this.props.clearCurrentReaderUserStore();
     }
     handleInfItem(index) {
-        let infItem = parseInt(index);
+        let infItem = parseInt(index, 0);
         this.setState({ currentInfItem: infItem });
         //console.log(this.state.currentInfItem);
     }
     setPaginationNum(num) {
-        let newNum = parseInt(num);
+        let newNum = parseInt(num, 0);
         this.setState({ paginationNum: newNum });
         //console.log(this.state.paginationNum);
     }
     handlePagination(num) {
-        let pageNum = parseInt(num);
+        let pageNum = parseInt(num, 0);
         this.setState({ page: pageNum });
         //console.log(this.state.page);
       }
     render(){
-        const searchItemIds = new Array("Name","AccountNumber");
-        const searchItemNames = new Array("姓名","账号");
+        const searchItemIds = ["Name","AccountNumber"];
+        const searchItemNames = ["姓名","账号"];
         return(
             <div>
                 <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
@@ -92,7 +90,6 @@ class UserManagePage extends Component{
                         itemNames={searchItemNames}
                         search={this.props.searchUser}
                         Title="user"
-                        uri = "http://localhost:61021/api/Users/GetReaderUserBySearch/"
                         />
                     </div>
                     <FunctionArea
@@ -137,13 +134,13 @@ function mapDispatchToProps(dispatch){
         clearReaderUserStore : () => dispatch(clearReaderUserStore()),
         initializationReaderUser : (data) => dispatch(initializationReaderUser(data)),
         onInitFormData: (data) => dispatch(initFormData(data)),
-        createAccount : (uri, data) => dispatch(createAccount(uri,data)), 
+        createAccount : (data) => dispatch(createAccount(data)), 
 
         clearCurrentReaderUserStore : () => dispatch(clearCurrentReaderUserStore()),
-        requstInitializationReaderUser : (uri) => dispatch(requstInitializationReaderUser(uri)),
+        requstInitializationReaderUser : () => dispatch(requstInitializationReaderUser()),
         searchUser : (uri) => dispatch(searchUser(uri)),
-        resetPassword : (uri,index) => dispatch(resetPassword(uri,index)),
-        blockUpUser: (uri,data,index) => dispatch(blockUpUser(uri,data,index)),
+        resetPassword : (userId,index) => dispatch(resetPassword(userId,index)),
+        blockUpUser: (userId,data,index) => dispatch(blockUpUser(userId,data,index)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserManagePage);

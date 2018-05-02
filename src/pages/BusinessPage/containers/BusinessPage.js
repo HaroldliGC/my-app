@@ -32,12 +32,9 @@ class BusinessPage extends Component{
         this.setState({ currentPath: path });
     }
     componentDidMount(){
-        //debugger
-        const uri = "http://localhost:61021/api/Orders/GetOrders/";
-        this.props.requstInitializationOrder(uri);
+        this.props.requstInitializationOrder();
     }
     componentWillReceiveProps(nextProps){
-        //debugger
         if (nextProps.messages.content !== ''){
           const message = nextProps.messages;
           let mylevel = '';
@@ -61,23 +58,20 @@ class BusinessPage extends Component{
         }
     }
     handleInfItem(index) {
-        let infItem = parseInt(index);
+        let infItem = parseInt(index, 0);
         this.setState({ currentInfItem: infItem });
-        //console.log(this.state.currentInfItem);
     }
     setPaginationNum(num) {
-        let newNum = parseInt(num);
+        let newNum = parseInt(num, 0);
         this.setState({ paginationNum: newNum });
-        //console.log(this.state.paginationNum);
     }
     handlePagination(num) {
-        let pageNum = parseInt(num);
+        let pageNum = parseInt(num, 0);
         this.setState({ page: pageNum });
-        //console.log(this.state.page);
       }
     render(){
-        const searchItemIds = new Array("UserName","BookName");
-        const searchItemNames = new Array("姓名","书名");
+        const searchItemIds = ["UserName","BookName"];
+        const searchItemNames = ["姓名","书名"];
         return(
             <div>
                 <NotificationSystem ref={(c) => (this.notificationSystem = c)} />
@@ -89,7 +83,6 @@ class BusinessPage extends Component{
                         itemNames={searchItemNames}
                         search={this.props.searchOrder}
                         Title="order"
-                        uri="http://localhost:61021/api/Orders/GetBusinessOrderBySearch/" 
                         />
                     </div>
                     <FunctionArea
@@ -118,11 +111,9 @@ class BusinessPage extends Component{
     }
 }
 function mapStateToProps(state) {
-    //console.log("state:",state.present.OperateBook)
     return {
       inf: state.present.OperateOrder.orders,
       messages: state.present.OperateOrder.messages,
-      //length: state.length,
       pastLength : state.past.length,
       futureLength : state.future.length,
     }
@@ -135,12 +126,12 @@ function mapDispatchToProps(dispatch){
         clearOrderStore : () => dispatch(clearOrderStore()),
         initializationOrder : (data) => dispatch(initializationOrder(data)),
         onInitFormData: (data) => dispatch(initFormData(data)),
-        editOrderRequest : (uri, index) => dispatch(editOrderRequest(uri, index)),
+        editOrderRequest : (orderId, index) => dispatch(editOrderRequest(orderId, index)),
 
-        requstInitializationOrder : (uri) => dispatch(requstInitializationOrder(uri)),
+        requstInitializationOrder : () => dispatch(requstInitializationOrder()),
         searchOrder : (uri) => dispatch(searchOrder(uri)),
-        deleteOrderRequst : (uri,index) => dispatch(deleteOrderRequst(uri,index)),
-        addOrderRequest : (uri, formData) => dispatch(addOrderRequest(uri, formData)),
+        deleteOrderRequst : (orderId,index) => dispatch(deleteOrderRequst(orderId,index)),
+        addOrderRequest : (formData) => dispatch(addOrderRequest(formData)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessPage);

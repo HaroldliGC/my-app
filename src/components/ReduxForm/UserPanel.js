@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
-import {NEW_USER, EDIT_USER, DETAIL_USER} from '../../common/OperateKeys';
+import {Modal,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
+import {NEW_USER, DETAIL_USER} from '../../common/OperateKeys';
 import classNames from 'classnames/bind';
 import styles from './BookPanel.css';
 import Form from '../ReduxForm/UserForm';
@@ -72,7 +72,7 @@ class UserPanel extends Component {
         const newUser = {...user,...formData};
         switch(this.props.inputType){
             case NEW_USER:
-                this.props.todo(this.props.url,newUser);
+                this.props.todo(newUser);
                 break;
             default:
         }
@@ -126,7 +126,6 @@ UserPanel.PropTypes = {
     todo : PropTypes.func,
     inputType : PropTypes.string,
     info : PropTypes.object,
-    url : PropTypes.string,
     initFormData : PropTypes.func,
     index : PropTypes.number
 }

@@ -14,7 +14,7 @@ export default class PaginationBasic extends Component{
     }
     render(){
         const length = this.props.Length;
-        const colNum = this.props.paginationNum;
+        //const colNum = this.props.paginationNum;
         let items = [];
         for(let i=0; i<length; i++){
             items.push(

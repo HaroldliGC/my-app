@@ -1,5 +1,5 @@
 import {initBookByAllNumber, initBookByNumber, initBookByReview, showMessage} from './consts';
-import {getToken, serviceApi, HOST} from '../../../common/utils';
+import {serviceApi, HOST} from '../../../common/utils';
 
 export function getBookByNumber(){
     const uri = `${HOST}api/Analysis/GetBookByNumber`;

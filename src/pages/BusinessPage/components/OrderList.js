@@ -14,7 +14,7 @@ export default class OrderList extends Component{
         var infListGroup = [];
         const colNum = this.props.paginationNum;
         var OrderInf = this.props.Inf;
-        if (OrderInf!=undefined){
+        if (OrderInf!==undefined){
             const infGroup = OrderInf;
             const length = infGroup.length;
             for (let i=0; i<length; i++){
@@ -35,7 +35,7 @@ export default class OrderList extends Component{
                     temp=[];
                 }
             }
-            if (temp.length!=0){
+            if (temp.length!==0){
                 infListGroup.push(temp);
             }    
         }

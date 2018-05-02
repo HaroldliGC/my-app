@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Modal,Header,Title,Body,FormGroup,Button,Col,ModalFooter} from 'react-bootstrap';
+import {Modal,ModalFooter} from 'react-bootstrap';
 import OrderForm from './OrderForm';
 import ButtonModal from '../../../components/Buttons/ButtonModal';
 

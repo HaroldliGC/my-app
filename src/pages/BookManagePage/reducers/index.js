@@ -15,12 +15,12 @@ function books (state=[],action){
             break;
         }
         case DELETE_INFITEM:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             newState.splice(index,1);
             break;
         }
         case EDIT_INF:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             newState.splice(index,1,action.text);
             break;
         }

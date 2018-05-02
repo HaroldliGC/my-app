@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import NotificationSystem from 'react-notification-system';
-import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {initBookByAllNumber, initBookByNumber, initBookByReview} from '../actions/consts';
 import {getBookByNumber,getBookByReview,getAllBook} from '../actions/index';

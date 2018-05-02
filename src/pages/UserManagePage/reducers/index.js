@@ -15,13 +15,13 @@ function users (state=[],action){
             return rec;
         }
         case DELETE_READERUSER:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             let rec = state.concat();
             rec.splice(index,1);
             return rec;
         }
         case EDIT_READERUSER:{
-            var index = parseInt(action.index);
+            const index = parseInt(action.index, 0);
             let rec = state.concat();
             rec.splice(index,1,action.text);
             return rec;

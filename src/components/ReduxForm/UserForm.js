@@ -1,11 +1,10 @@
-import autoBind from 'react-autobind';
 import className from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
-import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Glyphicon, HelpBlock} from 'react-bootstrap';
+import {Col, ControlLabel, Form, FormControl, FormGroup, Glyphicon, HelpBlock} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Field ,reduxForm} from 'redux-form';
-import {EDIT_USER ,DETAIL_USER, NEW_USER} from '../../common/OperateKeys';
+import {DETAIL_USER, NEW_USER} from '../../common/OperateKeys';
 import styles from './BookPanel.css';
 
 const cx = className.bind(styles);

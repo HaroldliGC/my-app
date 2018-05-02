@@ -11,8 +11,7 @@ export default class DeleteButton extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        const uri = this.props.uri + this.props.Inf.Id;
-        this.props.deleteBook(uri,this.props.index);
+        this.props.deleteBook(this.props.Inf.Id,this.props.index);
         this.props.handleInfItem(0);
     }
     render(){
@@ -27,5 +26,4 @@ DeleteButton.PropTypes = {
     deleteBook : PropTypes.func,
     index : PropTypes.number,
     Inf : PropTypes.number,
-    uri : PropTypes.string,
 }

@@ -30,8 +30,8 @@ export default class OrderForm extends Component{
     }
     
     render(){
-        var show = true;
-        if (this.props.Inf.OrderState==="unfinished"){
+        let show = true;
+        if (this.props.Inf.State==="renting"){
             show = false;
         }
         

@@ -48,7 +48,7 @@ class SyncValidationForm extends PureComponent {
             <Form horizontal>
                 <Field
                     name = "Isbn"
-                    type = "text"
+                    type = "number"
                     component = {renderField}
                     label = "国际标准书号"
                     componentClass = "input"
